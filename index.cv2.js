@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { REST as DiscordREST } from '@discordjs/rest';
 import {
   Client, GatewayIntentBits, Partials,
   ButtonBuilder, ButtonStyle, ActionRowBuilder,
@@ -111,7 +112,7 @@ import { Routes } from 'discord.js';
 async function ensureCommands(){
   const token = process.env.DISCORD_TOKEN, appId = process.env.APPLICATION_ID, guildId = process.env.GUILD_ID;
   if (!token || !appId || !guildId) return;
-  const rest = new REST({ version:'10' }).setToken(token);
+  const rest = new DiscordREST({ version:'10' }).setToken(token);
   const body = [{ name:'rustify', description:'Открыть навигационные страницы (Components V2)', options:[{name:'page', description:'Стартовая страница (id/slug)', type:3, required:false}] }];
   try { await rest.put(Routes.applicationGuildCommands(appId, guildId), { body }); console.log('[commands] registered', guildId); }
   catch(e){ console.warn('[commands] register failed', e.rawError ?? e); }
