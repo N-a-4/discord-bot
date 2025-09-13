@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import { REST, Routes } from 'discord.js';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord.js';
 const token = process.env.DISCORD_TOKEN;
 const appId = process.env.APPLICATION_ID;
 const guildId = process.env.GUILD_ID;

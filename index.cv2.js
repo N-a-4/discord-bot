@@ -1,18 +1,22 @@
-// --- tiny HTTP server so Render (Web Service) runs us ---
-import http from 'node:http';
-const PORT = process.env.PORT || 3000;
-http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('ok');
-}).listen(PORT, () => console.log('[web] listening on', PORT));
-// ---------------------------------------------------------
-
-
 import 'dotenv/config';
-import { Client, GatewayIntentBits, Partials, ButtonBuilder, ButtonStyle, ActionRowBuilder, MessageFlags, ContainerBuilder, TextDisplayBuilder, SectionBuilder, ThumbnailBuilder } from 'discord.js';
+import {
+  Client, GatewayIntentBits, Partials,
+  ButtonBuilder, ButtonStyle, ActionRowBuilder,
+  MessageFlags,
+  ContainerBuilder, TextDisplayBuilder, SectionBuilder, ThumbnailBuilder
+} from 'discord.js';
 import fs from 'node:fs';
 
 const DATA = JSON.parse(fs.readFileSync(new URL('./exported_project.json', import.meta.url), 'utf8'));
+// --- keepalive for Render Web Service ---
+import http from 'node:http';
+const PORT = process.env.PORT || 10000;
+try {
+  http.createServer((_req, res) => { res.writeHead(200); res.end('ok'); }).listen(PORT, () => {
+    console.log('[web] listening on', PORT);
+  });
+} catch {}
+
 const PAGES = new Map(); for (const e of DATA.embeds || []) if (e?.id) PAGES.set(String(e.id), e);
 const state = new Map(); // messageId -> { stack: [id] }
 function findPage(id){ return PAGES.get(String(id)); }
@@ -102,7 +106,8 @@ client.on('interactionCreate', async (i) => {
   }
 });
 
-import {  } from 'discord.js';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord.js';
 async function ensureCommands(){
   const token = process.env.DISCORD_TOKEN, appId = process.env.APPLICATION_ID, guildId = process.env.GUILD_ID;
   if (!token || !appId || !guildId) return;
