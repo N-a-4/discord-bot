@@ -25,13 +25,30 @@ function findPage(id){ return PAGES.get(String(id)); }
 
 function renderCV2(page){
   const container = new ContainerBuilder();
-  if (typeof page.color === 'number') container.setAccentColor(page.color);
+
+  // 1) HERO image (первая картинка страницы)
+  const hero = (page.items||[]).find(x => x && x.type === 'image' && x.url);
+  if (hero){
+    container.addSectionComponents(sec => {
+      try {
+        sec.setThumbnailAccessory(th => {
+          th.setURL(String(hero.url));
+          if (typeof th.setSize === 'function') th.setSize('LARGE');
+          if (typeof th.setShape === 'function') th.setShape('RECTANGLE');
+          if (typeof th.setStyle === 'function') th.setStyle('HERO');
+        });
+      } catch {}
+      // резервируем вертикальное пространство
+      sec.addTextDisplayComponents(td => td.setContent('​'));
+    });
+  }
+
   const navButtons = [];
   for (const item of page.items || []) {
     if (!item) continue;
     if (item.type === 'text' && item.text) {
       container.addTextDisplayComponents(td => td.setContent(String(item.text)));
-    } else if (item.type === 'image' && item.url) {
+    } else if (item.type === 'image' && item.url && item !== hero) {
       container.addSectionComponents(sec => sec
         .addTextDisplayComponents(td => td.setContent(item.caption || ''))
         .setThumbnailAccessory(th => th.setURL(String(item.url)))
@@ -46,6 +63,7 @@ function renderCV2(page){
       }
     }
   }
+
   if (navButtons.length) container.addActionRowComponents(row => row.setComponents(...navButtons.slice(0,5)));
   container.addActionRowComponents(row => row.setComponents(
     new ButtonBuilder().setCustomId('sys:back').setLabel('Назад').setStyle(ButtonStyle.Secondary),
