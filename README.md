@@ -1,6 +1,11 @@
-# Discord Bot from JSON (Rustify, CV2)
+# Discord Bot (CV2 / JSON)
 
-1. npm i
-2. .env с DISCORD_TOKEN, APPLICATION_ID, GUILD_ID
-3. npm start, затем /rustify
-Render Web Service: keepalive http-сервер уже включён.
+## Быстрый старт
+1) npm i
+2) Создай .env с переменными: DISCORD_TOKEN, APPLICATION_ID, GUILD_ID
+3) npm run register
+4) npm start
+
+## Режимы экспорта
+- JSON: index.cv2.js с UI-кодом, собранным из JSON
+- CV2: index.cv2.js использует embed.v2.code.js (вставленный код)

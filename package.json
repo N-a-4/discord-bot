@@ -1,8 +1,8 @@
 {
-  "name": "discord-bot-from-json",
+  "name": "discord-bot-from-json-or-cv2",
   "private": true,
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "scripts": {
     "start": "node index.cv2.js",
     "register": "node register-commands.js"
