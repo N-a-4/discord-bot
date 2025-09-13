@@ -1,0 +1,159 @@
+{
+  "format": "cv2",
+  "projectName": "Rustify | Workspace",
+  "embeds": [
+    {
+      "id": "embed-1756448619446",
+      "name": "Админ-панель",
+      "items": [
+        {
+          "type": "text",
+          "text": "Админ-панель"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "sub-1755323150368-hyj9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sub-1755323150368-hyj9_2",
+      "name": "Поддержка",
+      "items": [
+        {
+          "type": "text",
+          "text": "Поддержка"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "embed-1756448619446_2"
+            },
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "embed-1756285093009"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "embed-1756285093009_2",
+      "name": "Профиль",
+      "items": [
+        {
+          "type": "text",
+          "text": "Профиль"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "sub-1755323150368-hyj9_3"
+            },
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "sub-1756383981566-rxh9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sub-1756383981566-rxh9_2",
+      "name": "Депозит",
+      "items": [
+        {
+          "type": "text",
+          "text": "Депозит"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "embed-1756285093009_3"
+            },
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "sub-1756382998750-a1pw"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sub-1756382998750-a1pw_2",
+      "name": "Друзья",
+      "items": [
+        {
+          "type": "text",
+          "text": "Друзья"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "sub-1756383981566-rxh9_3"
+            },
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "sub-1756813518060-5wey"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sub-1756813518060-5wey_2",
+      "name": "Виджеты ( Install )",
+      "items": [
+        {
+          "type": "text",
+          "text": "Виджеты ( Install )"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "sub-1756382998750-a1pw_3"
+            },
+            {
+              "label": "Следующая →",
+              "linkToEmbedId": "sub-1756820823915-8qax"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sub-1756820823915-8qax_2",
+      "name": "Виджеты ( No install )",
+      "items": [
+        {
+          "type": "text",
+          "text": "Виджеты ( No install )"
+        },
+        {
+          "type": "buttons",
+          "buttons": [
+            {
+              "label": "← Предыдущая",
+              "linkToEmbedId": "sub-1756813518060-5wey_3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

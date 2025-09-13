@@ -1,0 +1,15 @@
+{
+  "name": "rustify-discord-bot-cv2",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch index.cv2.js",
+    "start": "node index.cv2.js",
+    "register": "node register-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
+  }
+}
