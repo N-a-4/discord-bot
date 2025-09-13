@@ -6,6 +6,7 @@ import {
   MessageFlags,
   ContainerBuilder, TextDisplayBuilder, SectionBuilder, ThumbnailBuilder
 } from 'discord.js';
+import { Routes } from 'discord.js';
 import fs from 'node:fs';
 
 const DATA = JSON.parse(fs.readFileSync(new URL('./exported_project.json', import.meta.url), 'utf8'));
