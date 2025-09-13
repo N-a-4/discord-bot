@@ -1,3 +1,13 @@
+// --- tiny HTTP server so Render (Web Service) runs us ---
+import http from 'node:http';
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('ok');
+}).listen(PORT, () => console.log('[web] listening on', PORT));
+// ---------------------------------------------------------
+
+
 import 'dotenv/config';
 import {
   Client, GatewayIntentBits, Partials,
