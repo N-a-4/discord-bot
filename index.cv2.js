@@ -1,11 +1,12 @@
 import 'dotenv/config';
-import { REST as DiscordREST } from '@discordjs/rest';
 import {
   Client, GatewayIntentBits, Partials,
   ButtonBuilder, ButtonStyle, ActionRowBuilder,
   MessageFlags,
   ContainerBuilder, TextDisplayBuilder, SectionBuilder, ThumbnailBuilder
 } from 'discord.js';
+import { REST as DiscordREST } from '@discordjs/rest';
+import { Routes } from 'discord.js';
 import fs from 'node:fs';
 
 const DATA = JSON.parse(fs.readFileSync(new URL('./exported_project.json', import.meta.url), 'utf8'));
@@ -107,8 +108,6 @@ client.on('interactionCreate', async (i) => {
   }
 });
 
-import { REST } from '@discordjs/rest';
-import { Routes } from 'discord.js';
 async function ensureCommands(){
   const token = process.env.DISCORD_TOKEN, appId = process.env.APPLICATION_ID, guildId = process.env.GUILD_ID;
   if (!token || !appId || !guildId) return;
