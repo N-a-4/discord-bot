@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord.js';
-
 async function main(){
   const token = process.env.DISCORD_TOKEN, appId = process.env.APPLICATION_ID, guildId = process.env.GUILD_ID;
   if (!token || !appId || !guildId) { console.log('Missing env'); return; }
