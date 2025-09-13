@@ -32,7 +32,7 @@ client.on('interactionCreate', async (interaction) => {
   try {
     if (interaction.isChatInputCommand() && interaction.commandName === 'rustify') {
       await interaction.deferReply({ ephemeral: false });
-      const mainContainer = new ContainerBuilder()
+const mainContainer = new ContainerBuilder()
 
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
@@ -54,6 +54,5 @@ import http from 'node:http';
 const port = process.env.PORT || 3000;
 http.createServer((_, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Bot is running
-');
+  res.end('Bot is running\n');
 }).listen(port, () => console.log('[http] keepalive on', port));
