@@ -1,89 +1,75 @@
+
 // resolveEmojisByName.js
-// Resolve emoji IDs by name for builder exports.
-// 1) Try guild custom emojis by *name*
-// 2) Fallback to Application Emojis (global, uploaded to the app) via REST
-//    Endpoint: GET /applications/{application.id}/emojis
-// Caches application emoji map in memory.
+// Resolve emoji IDs by name **only** from Application Emojis (uploaded to the bot in Dev Portal).
+// No guild/server lookups are performed here.
+//
+// Requires env vars:
+//   - DISCORD_TOKEN  : bot token
+//   - CLIENT_ID      : application (client) ID
+//
+// Exports:
+//   - loadApplicationEmojis(): Promise<Record<string,string>>
+//   - resolveEmojisByName(_ignoredGuild, names): Promise<{nameToId:Record<string,string>, missing:string[]}>
+//
+// How it works:
+//   1) On first call, fetches /applications/{CLIENT_ID}/emojis via REST and builds name->id map.
+//   2) Caches the map in memory for subsequent calls.
+//   3) For each requested name, returns the ID if found; otherwise adds it to `missing`.
 
 const { REST } = require('discord.js');
 
-let _appEmojiMap = null; // { name: id }
-let _appEmojiLoadPromise = null;
+let _appEmojiMap = null;          // { name: id }
+let _loadPromise = null;
 
-/** Load & cache Application Emojis (name -> id) using REST and env vars. */
+/** Fetch and cache Application Emojis (name -> id). */
 async function loadApplicationEmojis() {
   if (_appEmojiMap) return _appEmojiMap;
-  if (_appEmojiLoadPromise) return _appEmojiLoadPromise;
+  if (_loadPromise) return _loadPromise;
 
   const token = process.env.DISCORD_TOKEN;
   const appId = process.env.CLIENT_ID;
   if (!token || !appId) {
-    console.warn('[emojis] DISCORD_TOKEN or CLIENT_ID is missing; cannot fetch application emojis');
+    console.warn('[emojis] Missing DISCORD_TOKEN or CLIENT_ID; cannot fetch application emojis.');
     _appEmojiMap = {};
     return _appEmojiMap;
   }
 
   const rest = new REST({ version: '10' }).setToken(token);
-  _appEmojiLoadPromise = (async () => {
+  _loadPromise = (async () => {
     try {
-      // Discord HTTP route for application emojis.
-      // Using raw path to avoid version drift; discord.js REST accepts absolute/relative paths.
       const list = await rest.get(`/applications/${appId}/emojis`);
       const map = {};
       for (const e of list || []) {
         if (e?.name && e?.id) map[e.name] = e.id;
       }
       _appEmojiMap = map;
-      console.log('[emojis] Loaded application emojis:', Object.keys(map).length);
+      console.log('[emojis] Application emojis loaded:', Object.keys(map).length);
       return _appEmojiMap;
     } catch (err) {
       console.error('[emojis] Failed to load application emojis:', err?.message || err);
       _appEmojiMap = {};
       return _appEmojiMap;
     } finally {
-      _appEmojiLoadPromise = null;
+      _loadPromise = null;
     }
   })();
 
-  return _appEmojiLoadPromise;
+  return _loadPromise;
 }
 
 /**
- * @param {import('discord.js').Guild | null} guild
- * @param {string[]} names - emoji names referenced in the export
+ * Resolve emoji IDs by name using only Application Emojis.
+ * @param {*} _ignoredGuild - Not used (kept for signature compatibility)
+ * @param {string[]} names
  * @returns {Promise<{nameToId: Record<string,string>, missing: string[]}>}
  */
-async function resolveEmojisByName(guild, names) {
+async function resolveEmojisByName(_ignoredGuild, names) {
+  const appMap = await loadApplicationEmojis();
   const nameToId = {};
   const missing = [];
 
-  // 1) Try guild emojis (if any)
-  let coll = null;
-  if (guild) {
-    try {
-      coll = await guild.emojis.fetch();
-    } catch {
-      coll = guild.emojis?.cache ?? null;
-    }
-  }
-
-  // 2) Ensure application emojis are loaded
-  const appMap = await loadApplicationEmojis();
-
   for (const n of names) {
-    let id = null;
-
-    // guild by name
-    if (coll) {
-      const found = coll.find(e => e.name === n);
-      if (found) id = found.id;
-    }
-
-    // app-level by name
-    if (!id && appMap && appMap[n]) {
-      id = appMap[n];
-    }
-
+    const id = appMap[n] || null;
     if (id) nameToId[n] = id;
     else missing.push(n);
   }
@@ -91,4 +77,4 @@ async function resolveEmojisByName(guild, names) {
   return { nameToId, missing };
 }
 
-module.exports = { resolveEmojisByName, loadApplicationEmojis };
+module.exports = { loadApplicationEmojis, resolveEmojisByName };
