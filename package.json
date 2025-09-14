@@ -1,8 +1,8 @@
 {
-  "name": "discord-bot-cv2-emojiid-proxy",
+  "name": "discord-bot-cv2-emojiid-sync",
   "private": true,
   "type": "module",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "scripts": {
     "start": "node index.cv2.js",
     "register": "node register-commands.js"
