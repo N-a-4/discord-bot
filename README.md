@@ -1,4 +1,4 @@
-# Discord Bot (CV2 / JSON)
+# Discord Bot (CV2) — TS-style with Emoji IDs
 
 ## Быстрый старт
 1) npm i
@@ -6,6 +6,8 @@
 3) npm run register
 4) npm start
 
-## Режимы экспорта
-- JSON: index.cv2.js с UI-кодом, собранным из JSON
-- CV2: index.cv2.js использует embed.v2.code.js (вставленный код)
+## Режимы
+- TS Code: используем готовый код со страницы "TS Code"
+- JSON: собираем CV2 из JSON, добавляя emoji IDs (emojis[NAME].id)
+
+> В embed.v2.code.js переменная `emojis` должна быть доступна в рантайме или импортирована вами.

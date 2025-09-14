@@ -1,8 +1,8 @@
 {
-  "name": "discord-bot-from-json-or-cv2",
+  "name": "discord-bot-cv2-emojiid",
   "private": true,
   "type": "module",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "scripts": {
     "start": "node index.cv2.js",
     "register": "node register-commands.js"
