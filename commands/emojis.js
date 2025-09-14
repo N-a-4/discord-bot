@@ -1,3 +1,4 @@
+// commands/emojis.js — shows Application Emojis names→ids for diagnostics
 const { SlashCommandBuilder } = require('discord.js');
 const { loadApplicationEmojis } = require('../resolveEmojisByName');
 

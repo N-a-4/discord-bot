@@ -1,4 +1,4 @@
-// standalone.js — same as web.js but without HTTP server
+// standalone.js — worker mode (no HTTP). Registers /rustify and /appemojis.
 require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const Registry = require('./fs-registry');
@@ -6,9 +6,10 @@ const { loadApplicationEmojis } = require('./resolveEmojisByName');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// Commands
+// ---- Commands ----
 const rustify = require('./commands/rustify');
-const appemojis = require('./commands/emojis');
+const appemojis = require('./commands/emojis'); // << file name is commands/emojis.js
+
 client.commands = new Collection();
 client.commands.set(rustify.data.name, rustify);
 client.commands.set(appemojis.data.name, appemojis);
@@ -25,11 +26,13 @@ async function registerSlash() {
 
 client.on('ready', async () => {
   console.log(`[bot] Logged in as ${client.user.tag}`);
-  console.log('[exports]', Registry.list());
+  console.log('[exports] found:', Registry.list());
   try {
     const map = await loadApplicationEmojis();
     console.log('[emojis] Preloaded app emojis:', Object.keys(map).length);
-  } catch {}
+  } catch (e) {
+    console.log('[emojis] preload error:', e?.message || e);
+  }
 });
 
 client.on('interactionCreate', async (interaction) => {
