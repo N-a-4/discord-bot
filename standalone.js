@@ -1,30 +1,35 @@
-// fs-ingest/standalone.js
+// standalone.js — same as web.js but without HTTP server
 require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const path = require('path');
-const fs = require('fs');
 const Registry = require('./fs-registry');
+const { loadApplicationEmojis } = require('./resolveEmojisByName');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+// Commands
 const rustify = require('./commands/rustify');
+const appemojis = require('./commands/emojis');
 client.commands = new Collection();
 client.commands.set(rustify.data.name, rustify);
+client.commands.set(appemojis.data.name, appemojis);
 
 async function registerSlash() {
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-  const data = [rustify.data.toJSON()];
+  const data = [rustify.data.toJSON(), appemojis.data.toJSON()];
   const route = process.env.GUILD_ID
     ? Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID)
     : Routes.applicationCommands(process.env.CLIENT_ID);
   await rest.put(route, { body: data });
-  console.log('[slash] Registered to', process.env.GUILD_ID || 'GLOBAL');
+  console.log('[slash] Registered to', process.env.GUILD_ID || 'GLOBAL', 'count=', data.length);
 }
 
-client.on('ready', () => {
+client.on('ready', async () => {
   console.log(`[bot] Logged in as ${client.user.tag}`);
-  const list = Registry.list();
-  console.log('[exports] found:', list.length ? list.join(', ') : '(none)');
+  console.log('[exports]', Registry.list());
+  try {
+    const map = await loadApplicationEmojis();
+    console.log('[emojis] Preloaded app emojis:', Object.keys(map).length);
+  } catch {}
 });
 
 client.on('interactionCreate', async (interaction) => {
