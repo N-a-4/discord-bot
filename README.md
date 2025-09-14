@@ -1,13 +1,11 @@
-# Discord Bot (CV2) — TS-style with Emoji IDs
+# Discord Bot (CV2) — Emoji Proxy fallback
 
-## Быстрый старт
-1) npm i
-2) Создай .env с переменными: DISCORD_TOKEN, APPLICATION_ID, GUILD_ID
-3) npm run register
-4) npm start
+Эта сборка гарантирует, что обращения вида `emojis.NAME.id` не падают:
+- В рантайме создаётся Proxy для `emojis`, который возвращает `{ id: undefined, name: NAME }` для неизвестных имён.
+- `ButtonBuilder.setEmoji` «смягчён»: при `undefined`/пустом `id` просто ничего не делает.
 
-## Режимы
-- TS Code: используем готовый код со страницы "TS Code"
-- JSON: собираем CV2 из JSON, добавляя emoji IDs (emojis[NAME].id)
-
-> В embed.v2.code.js переменная `emojis` должна быть доступна в рантайме или импортирована вами.
+Порядок запуска:
+1) `npm i`
+2) `.env`: `DISCORD_TOKEN`, `APPLICATION_ID`, `GUILD_ID`
+3) `npm run register`
+4) `npm start`
