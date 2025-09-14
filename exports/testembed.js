@@ -1,4 +1,4 @@
-export async function renderEmbed(interaction, deps){\n  const { ContainerBuilder, MediaGalleryItemBuilder, ButtonBuilder, ButtonStyle, SeparatorSpacingSize, MessageFlags, ActionRowBuilder, StringSelectMenuBuilder } = deps;\n  function __buildEmojiMap(guild){ const m = Object.create(null); if (!guild) return m; const cache = guild && guild.emojis && guild.emojis.cache; if (cache && cache.forEach){ cache.forEach(e => { if (e && e.name) m[e.name] = { id: e.id, name: e.name, animated: !!e.animated }; }); } return m; }\n  const __base = (deps && deps.emojis) || __buildEmojiMap(interaction.guild) || {};\n  const emojis = new Proxy(__base, { get(t, p){ if (typeof p !== 'string') return t[p]; return (p in t) ? t[p] : { id: undefined, name: p, animated: false }; } });\n  try { if (typeof globalThis !== 'undefined') { globalThis.emojis = emojis; } } catch(_){ }\n  const exampleContainer = new ContainerBuilder()
+const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
       new MediaGalleryItemBuilder().setURL("https://i.ibb.co/39ynLZ21/5.png")
@@ -62,4 +62,4 @@ ${emojis.dot_gray} Список кланов в которых состоял и
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer, selectRow, buttonsRow]
-})\n}\n
+})
