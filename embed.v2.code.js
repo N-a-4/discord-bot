@@ -8,20 +8,24 @@ export async function renderEmbed(interaction, deps){
     )
     .addActionRowComponents(row => row
       .addComponents(
-        new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
+        new ButtonBuilder().setLabel("HVG").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setLabel("Участники").setCustomId("btn:btn-1757834497946").setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setLabel("Банк").setCustomId("btn:btn-1757834504642").setStyle(ButtonStyle.Secondary)
       )
     )
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
-  
   Это *пример* **текстового блока**`))
+    .addActionRowComponents(row => row
+      .addComponents(
+        new ButtonBuilder().setLabel("Тест 1").setCustomId("btn:btn-1757834516052").setStyle(ButtonStyle.Secondary)
+      )
+    )
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`**Маркет**
+  Приобретайте улучшения ваших баннеров`))
+    .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Тест-кнопка").setCustomId("btn:btn-1757834523269").setStyle(ButtonStyle.Secondary)))
   
-  { // selectRow
-    const selectRow = new ActionRowBuilder();
-    const sel = new StringSelectMenuBuilder().setCustomId("select").setPlaceholder("Выберите вариант").setOptions({ label: "Вариант 1", value: "вариант_1" }, { label: "Вариант 2", value: "вариант_2" }, { label: "Вариант 3", value: "вариант_3" });
-    selectRow.addComponents(sel);
-  }
   await interaction.editReply({
     flags: MessageFlags.IsComponentsV2,
-    components: [exampleContainer, selectRow]
+    components: [exampleContainer]
   })
 }
