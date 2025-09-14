@@ -1,54 +1,74 @@
-// standalone.js — worker mode (no HTTP). Registers /rustify and /appemojis.
-require('dotenv').config();
-const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const Registry = require('./fs-registry');
-const { loadApplicationEmojis } = require('./resolveEmojisByName');
+const { REST } = require('discord.js');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+let _loadPromise = null;
 
-// ---- Commands ----
-const rustify = require('./commands/rustify');
-const appemojis = require('./commands/emojis'); // << file name is commands/emojis.js
+/**
+ * Загружает эмодзи из Application Emojis API
+ */
+async function loadApplicationEmojis() {
+  if (_loadPromise) return _loadPromise;
 
-client.commands = new Collection();
-client.commands.set(rustify.data.name, rustify);
-client.commands.set(appemojis.data.name, appemojis);
+  _loadPromise = (async () => {
+    try {
+      const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+      const appId = process.env.CLIENT_ID;
 
-async function registerSlash() {
-  const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-  const data = [rustify.data.toJSON(), appemojis.data.toJSON()];
-  const route = process.env.GUILD_ID
-    ? Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID)
-    : Routes.applicationCommands(process.env.CLIENT_ID);
-  await rest.put(route, { body: data });
-  console.log('[slash] Registered to', process.env.GUILD_ID || 'GLOBAL', 'count=', data.length);
+      let list = await rest.get(`/applications/${appId}/emojis`);
+      console.log('[emojis] Raw response keys:', Object.keys(list));
+
+      // Попробуем извлечь массив эмодзи
+      let emojis = [];
+      if (Array.isArray(list)) {
+        emojis = list;
+      } else if (list.emojis && Array.isArray(list.emojis)) {
+        emojis = list.emojis;
+      } else if (list.items && Array.isArray(list.items)) {
+        emojis = list.items;
+      } else if (list.data && Array.isArray(list.data)) {
+        emojis = list.data;
+      } else if (list.results && Array.isArray(list.results)) {
+        emojis = list.results;
+      } else {
+        emojis = Object.values(list).filter(e => e && e.id && e.name);
+      }
+
+      console.log(`[emojis] Loaded application emojis: ${emojis.length}`);
+
+      const map = {};
+      for (const e of emojis) {
+        if (e.name && e.id) {
+          map[e.name] = e.id;
+        }
+      }
+      return map;
+    } catch (err) {
+      console.error('[emojis] Failed to load application emojis:', err.message);
+      return {};
+    }
+  })();
+
+  return _loadPromise;
 }
 
-client.on('ready', async () => {
-  console.log(`[bot] Logged in as ${client.user.tag}`);
-  console.log('[exports] found:', Registry.list());
-  try {
-    const map = await loadApplicationEmojis();
-    console.log('[emojis] Preloaded app emojis:', Object.keys(map).length);
-  } catch (e) {
-    console.log('[emojis] preload error:', e?.message || e);
-  }
-});
+/**
+ * Сопоставляет имена эмодзи с ID
+ */
+async function resolveEmojisByName(_ignoredGuild, names) {
+  const appMap = await loadApplicationEmojis();
+  const nameToId = {};
+  const missing = [];
 
-client.on('interactionCreate', async (interaction) => {
-  if (interaction.isChatInputCommand()) {
-    const cmd = client.commands.get(interaction.commandName);
-    if (cmd) await cmd.execute(interaction);
-  } else if (interaction.isAutocomplete()) {
-    const cmd = client.commands.get(interaction.commandName);
-    if (cmd?.autocomplete) await cmd.autocomplete(interaction);
+  for (const n of names) {
+    const id = appMap[n] || null;
+    if (id) nameToId[n] = id;
+    else missing.push(n);
   }
-});
 
-(async () => {
-  await registerSlash();
-  await client.login(process.env.DISCORD_TOKEN);
-})().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+  if (missing.length) {
+    console.log('Не найдены эмодзи:', missing.join(', '));
+  }
+
+  return { nameToId, missing };
+}
+
+module.exports = { loadApplicationEmojis, resolveEmojisByName };
