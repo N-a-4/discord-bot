@@ -8,29 +8,18 @@ export async function renderEmbed(interaction, deps){
     )
     .addActionRowComponents(row => row
       .addComponents(
-        new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
+        new ButtonBuilder().setLabel("HVG").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setLabel("Участники").setCustomId("btn:btn-1757823328134").setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder().setLabel("Банк").setCustomId("btn:btn-1757823357351").setStyle(ButtonStyle.Secondary)
       )
     )
     .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
   
   Это *пример* **текстового блока**`))
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
   
-  Текст с кнопкой справа.`))
-    .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1757794900794").setStyle(ButtonStyle.Secondary)))
-  
-  { // selectRow
-    const selectRow = new ActionRowBuilder();
-    const sel = new StringSelectMenuBuilder().setCustomId("select").setPlaceholder("TEST").setOptions({ label: "Вариант 1", value: "вариант_1" }, { label: "Вариант 2", value: "вариант_2" }, { label: "Вариант 3", value: "вариант_3" });
-    selectRow.addComponents(sel);
-  }
-  { // buttonsRow
-    const buttonsRow = new ActionRowBuilder();
-    buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1757794881647").setStyle(ButtonStyle.Secondary));
-  }
   await interaction.editReply({
     flags: MessageFlags.IsComponentsV2,
-    components: [exampleContainer, selectRow, buttonsRow]
+    components: [exampleContainer]
   })
 }
