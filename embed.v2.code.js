@@ -3,23 +3,46 @@ export async function renderEmbed(interaction, deps){
   const exampleContainer = new ContainerBuilder()
     .addMediaGalleryComponents(mediaGallery => mediaGallery
       .addItems(
-        new MediaGalleryItemBuilder().setURL("https://i.ibb.co/gM3ZJYGt/vidget.png?ex=689d27e1&is=689bd661&hm=0ba370ab75ace8478cbcc6c596b0dda51c9a9dc41b055f881c3ef83371f7e094&=&format=webp&quality=lossless&width=1100&height=330")
+        new MediaGalleryItemBuilder().setURL("https://i.ibb.co/gM3ZJYGt/vidget.png")
       )
     )
     .addActionRowComponents(row => row
       .addComponents(
-        new ButtonBuilder().setLabel("HVG").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setLabel("Участники").setCustomId("btn:btn-1757823328134").setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder().setLabel("Банк").setCustomId("btn:btn-1757823357351").setStyle(ButtonStyle.Secondary)
+        new ButtonBuilder().setLabel("Общие правила").setCustomId("btn:btn-1756053696332").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.anketa_mix.id }),
+        new ButtonBuilder().setLabel("Кланы").setCustomId("mini:mini-hvwkwje").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id })
       )
     )
     .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### **Правила**`))
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`**${emojis.bigdot_purp} 1. Поощрение читерства**
+  ${emojis.dot_purp} Запрещено игнорировать наличие читеров в составе. Безразличие к подобному поведению рассматривается как молчаливое одобрение.
+  -# ${emojis.dot_gray} Наказание выдается при наличии доказательства того, что глава клана или любой другой член руководства осведомлен о наличии читера в клане и в течении суток не принял меры по его исключению с состава.
+  ${emojis.report} **Наказание**: Временное понижение рейтинга или блокировка.
+  ㅤ
+  **${emojis.bigdot_purp} 2. Мошенничество и скам**
+  ${emojis.dot_purp} Категорически запрещены любые действия, направленные на обман игроков: попытки получить доступ к их аккаунтам, установку подозрительных программ под видом проверки на читы, передачу фишинговых ссылок или выманивание личных данных.
+  ${emojis.dot_gray} Кланы и игроки, уличённые в подобной деятельности, получат немедленный бан быстрее чем успеют сказать \`«это пранк»\`
+  ${emojis.report} **Наказание**: Блокировка навсегда
+  ㅤ
+  **${emojis.bigdot_purp} 3. Манипуляции с системой Rustify**
+  ${emojis.dot_purp} Попытки искусственно накрутить репутацию, активность или другие показатели строго запрещены.
+  ${emojis.report} **Наказание**: Временное понижение рейтинга или блокировка.
+  ㅤ
+  **${emojis.bigdot_purp} 4. Запрещена выдача клана за другой**
+  ${emojis.dot_purp} Создание клана с целью маскировки под чужой известный состав, использование похожих названий или эмблем — приравнивается к введению в заблуждение.
+  ${emojis.report} **Наказание**: Блокировка до устранения схожести.`))
+    .addActionRowComponents(row => row
+      .addComponents(
+        new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757707268751").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.love.id })
+      )
+    )
   
-  Это *пример* **текстового блока**`))
-  
+  { // buttonsRow
+    const buttonsRow = new ActionRowBuilder();
+    buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("embed:embed-1754855196673").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.cross_purp.id }));
+  }
   await interaction.editReply({
     flags: MessageFlags.IsComponentsV2,
-    components: [exampleContainer]
+    components: [exampleContainer, buttonsRow]
   })
 }
