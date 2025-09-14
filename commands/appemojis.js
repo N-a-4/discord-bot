@@ -1,4 +1,3 @@
-// commands/emojis.js
 const { SlashCommandBuilder } = require('discord.js');
 const { loadApplicationEmojis } = require('../resolveEmojisByName');
 
