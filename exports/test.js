@@ -13,13 +13,6 @@ const exampleContainer = new ContainerBuilder()
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.user_2_mix} **Игрок**: @username (\`.na4.\`)
-${emojis.steam_mix} **Steam**: Не подключен
-${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
-${emojis.balance} \`Баланс\`: Скоро`))
-    .setThumbnailAccessory(thumb => thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"))
-  )
-  .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`))
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
