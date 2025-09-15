@@ -4,6 +4,7 @@ const Registry = require('../fs-registry');
 const { collectEmojiNamesFromCode } = require('../collectEmojiNames');
 const { resolveEmojisByName } = require('../resolveEmojisByName');
 const { runExportJS } = require('../runner');
+const { safeEditReply } = require('../utils/safeEditReply');
 
 function buildFallbackEmbed(name, details) {
   const embed = new EmbedBuilder()
@@ -106,7 +107,15 @@ module.exports = {
     }
 
     try {
-      await runExportJS(entry.code, interaction, emojiMap);
+const safeInteraction = new Proxy(interaction, {
+  get(target, prop) {
+    if (prop === 'editReply') {
+      return (payload) => safeEditReply(target, payload);
+    }
+    return Reflect.get(target, prop);
+  }
+});
+      await runExportJS(entry.code, safeInteraction, emojiMap);
     } catch (e) {
       console.error('[rustify] runExportJS error:', e);
       const embed = buildFallbackEmbed(name, { error: e });
