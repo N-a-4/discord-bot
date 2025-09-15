@@ -48,17 +48,16 @@ ${emojis.dot_gray} Просмотр нарушений и создание жа�
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
 ${emojis.dot_gray} Список кланов в которых состоял игрок`))
   .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id })))
-
-{ // selectRow
-  const selectRow = new ActionRowBuilder();
+let selectRow;
+let buttonsRow;
+// selectRow
+  selectRow = new ActionRowBuilder();
   const sel = new StringSelectMenuBuilder().setCustomId("select").setPlaceholder("Поставьте оценку данному игроку").setOptions({ label: "5 — Отличный тиммейт", value: "5_—_отличный_тиммейт", description: "Надёжен, всегда помогает команде, выполняет договорённости, не бросает в бою.", emoji: { id: emojis["5score"].id } }, { label: "4 — Доверенный союзник", value: "4_—_доверенный_союзник", description: "Играет слаженно, выполняет свою роль, но может иногда действовать по-своему.", emoji: { id: emojis["4score"].id } }, { label: "3 — Обычный тиммейт", value: "3_—_обычный_тиммейт", description: "Не токсичен, не предаёт, но и не проявляет особой вовлечённости в командную игру.", emoji: { id: emojis["3score"].id } }, { label: "2 — Сложный игрок", value: "2_—_сложный_игрок", description: "Играет нестабильно, может вести себя неадекватно.", emoji: { id: emojis["2score"].id } }, { label: "1 — Опасный игрок", value: "1_—_опасный_игрок", description: "Может украсть лут, слить базу, специально мешать игре или предать в самый важный момент.", emoji: { id: emojis["1score"].id } });
   selectRow.addComponents(sel);
-}
-{ // buttonsRow
-  const buttonsRow = new ActionRowBuilder();
+// buttonsRow
+  buttonsRow = new ActionRowBuilder();
   buttonsRow.addComponents(new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.back_purp.id }));
   buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("btn:btn-1755084324911").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.cross_purp.id }));
-}
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer, selectRow, buttonsRow]
