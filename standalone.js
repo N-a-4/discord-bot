@@ -1,5 +1,3 @@
-cd /root/discord-bot
-cat > resolveEmojisByName.js <<'EOF'
 // resolveEmojisByName.js (robust)
 const { REST } = require('discord.js');
 

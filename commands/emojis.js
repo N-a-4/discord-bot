@@ -4,7 +4,7 @@ const { loadApplicationEmojis } = require('../resolveEmojisByName');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('appemojis')
+    .setName('emojis')
     .setDescription('Показать эмодзи приложения (имя → id).'),
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
