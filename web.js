@@ -48,9 +48,32 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
+// ---- Robust HTTP start with port retry if EADDRINUSE ----
+function startHttpWithRetry(preferredPort, attempts = 5) {
+  return new Promise((resolve, reject) => {
+    const tryListen = (port, left) => {
+      const server = app.listen(port, () => {
+        console.log('[http] listening on', port);
+        resolve(server);
+      });
+      server.on('error', (err) => {
+        if (err && err.code === 'EADDRINUSE' && left > 0) {
+          const next = port + 1;
+          console.warn(`[http] port ${port} in use, retrying on ${next} (left: ${left - 1})`);
+          setTimeout(() => tryListen(next, left - 1), 150);
+        } else {
+          console.error('[http] listen error:', err);
+          reject(err);
+        }
+      });
+    };
+    tryListen(preferredPort, attempts);
+  });
+}
+
 (async () => {
-  const port = process.env.PORT || 3000;
-  app.listen(port, () => console.log('[http] listening on', port));
+  const preferred = Number(process.env.PORT) || 3000;
+  await startHttpWithRetry(preferred, 9); // try up to 10 ports: preferred..preferred+9
   await registerSlash();
   await client.login(process.env.DISCORD_TOKEN);
 })().catch(err => {
