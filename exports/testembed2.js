@@ -11,11 +11,8 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### **Общие правила**`))
-  )
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`**${emojis.bigdot_purp} 1. Использование / распространение читов**
+  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### **Общие правила**`))
+  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`**${emojis.bigdot_purp} 1. Использование / распространение читов**
 ${emojis.dot_purp} Запрещено использование стороннего софта, скриптов и любых методов нечестной игры. Также под запретом помощь в распространении или реклама таких программ.
 ${emojis.report} **Наказание**: Блокировка на 365 дней (1 год)
 ㅤ
@@ -29,18 +26,12 @@ ${emojis.dot_purp} Попытки искусственно накрутить р
 ${emojis.report} **Наказание**: Временное понижение рейтинга или блокировка.
 
 ${emojis.info_yell} Администрация оставляет за собой право выдать наказание по причине, не указанной здесь, а также изменять срок/тяжесть наказания в зависимости от ситуации. По этому всегда руководствуйтесь здравым смыслом и не пытайтесь обойти правила прибегая к хитростям.`))
-  )
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757952597917").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.ok.id })
     )
   )
-let selectRow;
-let buttonsRow;
-// buttonsRow
-  buttonsRow = new ActionRowBuilder();
-  buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("embed:embed-1754855196673").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.cross_purp.id }));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
-  components: [exampleContainer, buttonsRow]
+  components: [exampleContainer]
 })
