@@ -1,7 +1,7 @@
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
-      new MediaGalleryItemBuilder().setURL("URL".replace("URL", JSON.stringify(String(m.url)).slice(1,-1)) )
+      new MediaGalleryItemBuilder().setURL("https://i.ibb.co/39ynLZ21/5.png")
     )
   )
   .addActionRowComponents(row => row
@@ -17,7 +17,7 @@ const exampleContainer = new ContainerBuilder()
 ${emojis.steam_mix} **Steam**: Не подключен
 ${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
 ${emojis.balance} \`Баланс\`: Скоро`))
-    .setThumbnailAccessory(thumb => { thumb.setURL("URL".replace("URL", JSON.stringify(String(c.thumbUrl)).slice(1,-1))); return thumb; })
+    .setThumbnailAccessory(thumb => { thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"); return thumb; })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
