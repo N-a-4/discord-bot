@@ -1,5 +1,7 @@
+// resolveEmojisByName.js
+// Chosen version: simple fetch-based Application Emojis resolver with caching.
+// Reason: no extra imports; works with Node 18+ global fetch; straightforward to debug.
 
-// resolveEmojisByName.js — fetch Application Emojis via HTTPS (bypass discord.js REST)
 let _cache = null;
 let _loading = null;
 
@@ -19,25 +21,41 @@ function normalize(list) {
 async function fetchAppEmojis() {
   const token = process.env.DISCORD_TOKEN;
   const appId = process.env.CLIENT_ID;
-  if (!token || !appId) return {};
-
-  const url = `https://discord.com/api/v10/applications/${appId}/emojis`;
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bot ${token}`,
-      'User-Agent': 'DiscordBot (app-emojis, 1.0)',
-      'Accept': 'application/json'
-    }
-  });
-
-  if (!res.ok) {
-    let txt = await res.text().catch(()=>'');
-    log('HTTP error', res.status, res.statusText, txt.slice(0,200));
+  if (!token || !appId) {
+    log('Missing DISCORD_TOKEN or CLIENT_ID');
     return {};
   }
 
-  const body = await res.json().catch(()=>({}));
+  if (typeof fetch !== 'function') {
+    log('Global fetch is not available (Node < 18?). Cannot resolve application emojis.');
+    return {};
+  }
+
+  const url = `https://discord.com/api/v10/applications/${appId}/emojis`;
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bot ${token}`,
+        'User-Agent': 'DiscordBot (app-emojis, 1.0)',
+        'Accept': 'application/json'
+      }
+    });
+  } catch (err) {
+    log('Network error while fetching application emojis:', err?.message || err);
+    return {};
+  }
+
+  if (!res.ok) {
+    let txt = '';
+    try { txt = await res.text(); } catch {}
+    log('HTTP error', res.status, res.statusText, txt.slice(0, 200));
+    return {};
+  }
+
+  let body = {};
+  try { body = await res.json(); } catch {}
   const arr = normalize(body);
   const map = {};
   for (const e of arr) if (e?.name && e?.id) map[e.name] = e.id;
@@ -60,11 +78,11 @@ async function getEmojiMap() {
   return _loading;
 }
 
-async function resolveEmojisByName(_ignored, names) {
+async function resolveEmojisByName(_ignoredGuild, names) {
   const map = await getEmojiMap();
   const nameToId = {};
   const missing = [];
-  for (const n of names) {
+  for (const n of names || []) {
     const id = map[n] || null;
     if (id) nameToId[n] = id; else missing.push(n);
   }
