@@ -1,7 +1,7 @@
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
-      new MediaGalleryItemBuilder().setURL("https://i.ibb.co/39ynLZ21/5.png")
+      new MediaGalleryItemBuilder().setURL("URL".replace("URL", JSON.stringify(String(m.url)).slice(1,-1)) )
     )
   )
   .addActionRowComponents(row => row
@@ -17,12 +17,12 @@ const exampleContainer = new ContainerBuilder()
 ${emojis.steam_mix} **Steam**: Не подключен
 ${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
 ${emojis.balance} \`Баланс\`: Скоро`))
-    .setThumbnailAccessory(thumb => thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"))
+    .setThumbnailAccessory(thumb => { thumb.setURL("URL".replace("URL", JSON.stringify(String(c.thumbUrl)).slice(1,-1))); return thumb; })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`))
-    .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
+    .setButtonAccessory(btn => { return btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }); })
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
@@ -43,19 +43,19 @@ ${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Аналитика игрока**
-${emojis.dot_gray} Боевые показатели и прочая статистика`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Статистика**
+${emojis.dot_gray} Игровые показатели игрока`))
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }); })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
 ${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }); })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
 ${emojis.dot_gray} Список кланов в которых состоял игрок`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }); })
   )
 let selectRow;
 let buttonsRow;
