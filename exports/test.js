@@ -1,3 +1,15 @@
+/** Safe emoji prelude (auto-injected)
+ * Ensures `emojis` exists and adds helper to set emoji only when available.
+ */
+if (typeof emojis === 'undefined') { var emojis = (globalThis && globalThis.emojis) ? globalThis.emojis : {}; }
+function applyEmoji(builder, key) {
+  try {
+    const meta = (emojis && (emojis[key] || (emojis.emojiMap && emojis.emojiMap[key]))) || null;
+    if (meta && meta.id) builder.setEmoji({ id: meta.id });
+  } catch (e) {}
+  return builder;
+}
+
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
@@ -6,16 +18,23 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.back_purp.id }),
-      new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id }),
-      new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1755604825553-gjw9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.handshake_mix.id })
+      applyEmoji(new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary), "back_purp"),
+      applyEmoji(new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary), "user_2_mix"),
+      applyEmoji(new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1755604825553-gjw9").setStyle(ButtonStyle.Secondary), "handshake_mix")
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.user_2_mix} **Игрок**: @username (\`.na4.\`)
+${emojis.steam_mix} **Steam**: Не подключен
+${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
+${emojis.balance} \`Баланс\`: Скоро`))
+    .setThumbnailAccessory(thumb => thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"))
+  )
+  .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`))
-    .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
+    .setButtonAccessory(btn => applyEmoji(btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary), "crown_mix"))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
@@ -38,12 +57,17 @@ ${emojis.dot_yell} \`За 30 дней\`: 0ч.`))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Статистика**
 ${emojis.dot_gray} Боевые показатели игрока`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => applyEmoji(btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary), "eye"))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
 ${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => applyEmoji(btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary), "eye"))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
+${emojis.dot_gray} Список кланов в которых состоял игрок`))
+    .setButtonAccessory(btn => applyEmoji(btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary), "eye"))
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
