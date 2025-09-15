@@ -21,11 +21,7 @@ ${emojis.balance} \`Баланс\`: Скоро`))
   )
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
-${emojis.a2} **Должность**: Заместитель`))
-    .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
-  )
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id })))
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### Клановая активность
 ${emojis.mic_small_purple} **Общение с кланом**: 691ч.
@@ -35,17 +31,7 @@ ${emojis.dot_yell} \`За 30 дней\`: 48ч.
 ${emojis.gamepad_small_purple} **Наиграно в RUST**: 394ч.
 ${emojis.dot_yell} \`За 7 дней\`: 12ч.
 ${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### Клановая активность
-${emojis.mic_small_purple} **Общение с кланом**: 691ч.
-${emojis.dot_yell} \`За 7 дней\`: 17ч.
-${emojis.dot_yell} \`За 30 дней\`: 48ч.
-
-${emojis.gamepad_small_purple} **Наиграно в RUST**: 394ч.
-${emojis.dot_yell} \`За 7 дней\`: 12ч.
-${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
-    .setButtonAccessory(btn => btn.setLabel("148").setCustomId("btn:btn-1756791737674").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id }))
-  )
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1756791737674").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id })))
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Общая").setCustomId("mini:mini-9wvcu97").setStyle(ButtonStyle.Secondary),
@@ -55,25 +41,13 @@ ${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Аналитика игрока**
 ${emojis.dot_gray} Боевые показатели и прочая статистика`))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Аналитика игрока**
-${emojis.dot_gray} Боевые показатели и прочая статистика`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
-  )
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id })))
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
 ${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
-${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
-  )
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id })))
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
 ${emojis.dot_gray} Список кланов в которых состоял игрок`))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
-${emojis.dot_gray} Список кланов в которых состоял игрок`))
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
-  )
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id })))
 let selectRow;
 let buttonsRow;
 // selectRow
