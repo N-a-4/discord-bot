@@ -22,7 +22,7 @@ ${emojis.balance} \`Баланс\`: Скоро`))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`))
-    .setButtonAccessory(btn => { return btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary);  })
+    .setButtonAccessory(btn => { return btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary);   })
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
@@ -45,17 +45,17 @@ ${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Статистика**
 ${emojis.dot_gray} Игровые показатели игрока`))
-    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary);  })
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary);   })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
 ${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary);  })
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary);   })
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
 ${emojis.dot_gray} Список кланов в которых состоял игрок`))
-    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary);  })
+    .setButtonAccessory(btn => { return btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary);   })
   )
 let selectRow;
 let buttonsRow;
