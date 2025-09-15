@@ -32,7 +32,12 @@ ${emojis.info_yell} Администрация оставляет за собо�
       new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757707268751").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id })
     )
   )
+
+{ // buttonsRow
+  const buttonsRow = new ActionRowBuilder();
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("embed:embed-1754855196673").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.cross_purp.id }));
+}
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
-  components: [exampleContainer]
+  components: [exampleContainer, buttonsRow]
 })
