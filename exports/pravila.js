@@ -34,7 +34,6 @@ ${emojis.dot_yell} \`За 30 дней\`: 48ч.
 ${emojis.gamepad_small_purple} **Наиграно в RUST**: 394ч.
 ${emojis.dot_yell} \`За 7 дней\`: 12ч.
 ${emojis.dot_yell} \`За 30 дней\`: 64ч.`))
-    .setButtonAccessory(btn => btn.setLabel("148").setCustomId("btn:btn-1756791737674").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id }))
   )
   .addActionRowComponents(row => row
     .addComponents(
