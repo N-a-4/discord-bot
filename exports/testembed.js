@@ -8,7 +8,7 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setLabel("•").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary),
       new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary),
       new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1755604825553-gjw9").setStyle(ButtonStyle.Secondary)
     )
@@ -80,7 +80,7 @@ let buttonsRow;
   }
 // buttonsRow
   buttonsRow = new ActionRowBuilder();
-  buttonsRow.addComponents(new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary));
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("•").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary));
   buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("btn:btn-1755084324911").setStyle(ButtonStyle.Secondary));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
