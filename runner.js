@@ -1,7 +1,4 @@
-// fs-ingest/runner.js
-// Execute exported CV2 code inside an async function so top-level `await` works.
-// Also forwards Discord builders & enums to the sandboxed function.
-
+// runner.js
 const {
   ActionRowBuilder,
   ButtonBuilder,
@@ -13,35 +10,29 @@ const {
   SeparatorSpacingSize,
 } = require('discord.js');
 
-// Build AsyncFunction constructor
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
-function makeEmojiMap(nameToId = {}) {
+function makeEmojiMap(nameToMeta = {}) {
   const map = {};
-  for (const [name, id] of Object.entries(nameToId)) {
+  for (const [name, meta] of Object.entries(nameToMeta)) {
+    const id = typeof meta === 'string' ? meta : meta?.id;
+    const animated = typeof meta === 'object' ? !!meta.animated : false;
     map[name] = {
       id,
+      animated,
       name,
       toString() {
-        return id ? `<:${name}:${id}>` : name;
+        if (!id) return name;
+        const prefix = animated ? 'a' : '';
+        return `<${prefix}:${name}:${id}>`;
       },
     };
   }
   return map;
 }
 
-/**
- * Execute a piece of JS that was exported by the Embed Builder.
- * The code may contain top-level await; we run it inside AsyncFunction.
- *
- * @param {string} code - The exported JS source
- * @param {import('discord.js').Interaction} interaction - Discord interaction
- * @param {Record<string,string>} nameToId - emoji-name → id map
- */
-async function runExportJS(code, interaction, nameToId) {
-  const emojis = makeEmojiMap(nameToId);
-
-  // Compose function *body*; top-level code will run in async context.
+async function runExportJS(code, interaction, emojiMap) {
+  const emojis = makeEmojiMap(emojiMap || {});
   const body = `"use strict";\n${code}\n`;
 
   let fn;
@@ -60,7 +51,6 @@ async function runExportJS(code, interaction, nameToId) {
       body
     );
   } catch (compileErr) {
-    // Surface a clearer error to the caller
     const msg = compileErr?.message || String(compileErr);
     throw new Error(`[runner] Failed to compile exported code: ${msg}`);
   }
@@ -79,7 +69,6 @@ async function runExportJS(code, interaction, nameToId) {
       MessageFlags
     );
   } catch (runtimeErr) {
-    // Let the caller decide how to render this
     const msg = runtimeErr?.message || String(runtimeErr);
     const err = new Error(`[runner] Runtime error: ${msg}`);
     err.cause = runtimeErr;

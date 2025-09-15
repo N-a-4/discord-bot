@@ -1,7 +1,4 @@
 // resolveEmojisByName.js
-// Chosen version: simple fetch-based Application Emojis resolver with caching.
-// Reason: no extra imports; works with Node 18+ global fetch; straightforward to debug.
-
 let _cache = null;
 let _loading = null;
 
@@ -58,8 +55,14 @@ async function fetchAppEmojis() {
   try { body = await res.json(); } catch {}
   const arr = normalize(body);
   const map = {};
-  for (const e of arr) if (e?.name && e?.id) map[e.name] = e.id;
-  log('Fetched application emojis via fetch():', Object.keys(map).length);
+  for (const e of arr) {
+    const name = e?.name;
+    const id = e?.id;
+    if (name && id) {
+      map[name] = { id, animated: !!e?.animated };
+    }
+  }
+  log('Fetched application emojis:', Object.keys(map).length);
   return map;
 }
 
@@ -80,14 +83,15 @@ async function getEmojiMap() {
 
 async function resolveEmojisByName(_ignoredGuild, names) {
   const map = await getEmojiMap();
-  const nameToId = {};
+  const emojiMap = {};
   const missing = [];
   for (const n of names || []) {
-    const id = map[n] || null;
-    if (id) nameToId[n] = id; else missing.push(n);
+    const meta = map[n] || null;
+    if (meta?.id) emojiMap[n] = { id: meta.id, animated: !!meta.animated };
+    else missing.push(n);
   }
   if (missing.length) log('Missing names:', missing.join(', '));
-  return { nameToId, missing };
+  return { emojiMap, missing };
 }
 
 module.exports = { resolveEmojisByName, loadApplicationEmojis: getEmojiMap };
