@@ -94,4 +94,3 @@ async function resolveEmojisByName(_ignoredGuild, names) {
 }
 
 module.exports = { loadApplicationEmojis, resolveEmojisByName };
-EOF
