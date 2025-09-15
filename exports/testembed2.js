@@ -29,7 +29,11 @@ ${emojis.dot_purp} Попытки искусственно накрутить р
 ${emojis.report} **Наказание**: Временное понижение рейтинга или блокировка.
 
 ${emojis.info_yell} Администрация оставляет за собой право выдать наказание по причине, не указанной здесь, а также изменять срок/тяжесть наказания в зависимости от ситуации. По этому всегда руководствуйтесь здравым смыслом и не пытайтесь обойти правила прибегая к хитростям.`))
-    .setButtonAccessory(btn => { return btn.setLabel("148").setCustomId("btn:btn-1757952597917").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.ok.id }); })
+  )
+  .addActionRowComponents(row => row
+    .addComponents(
+      new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757952597917").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.ok.id })
+    )
   )
 let selectRow;
 let buttonsRow;
