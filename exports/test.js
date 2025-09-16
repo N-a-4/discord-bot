@@ -57,7 +57,7 @@ ${emojis.dot_gray} Просмотр нарушений и создание жа�
 ${emojis.dot_gray} Список кланов в которых состоял игрок`))
     .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
   )
-await interaction.editReply({
-  flags: MessageFlags.IsComponentsV2,
-  components: [exampleContainer, selectRow, buttonsRow]
-})
+await channel.send({
+	components: [exampleContainer],
+	flags: MessageFlags.IsComponentsV2,
+});
