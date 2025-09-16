@@ -1,4 +1,6 @@
-// runner.fix_1b.js — safe builders + better diagnostics
+// runner.fix_1c.js — SAFE_1C (banner) + safe builders + diagnostics
+console.log('[runner] SAFE_1C loaded');
+
 const {
   ActionRowBuilder,
   ButtonBuilder,
@@ -27,7 +29,6 @@ class SafeButtonBuilder extends ButtonBuilder {
 class SafeStringSelectMenuBuilder extends StringSelectMenuBuilder {
   addOptions(...args) {
     try {
-      // Flatten and sanitize emoji field
       const flat = [];
       for (const a of args) {
         if (Array.isArray(a)) flat.push(...a);
@@ -46,7 +47,6 @@ class SafeStringSelectMenuBuilder extends StringSelectMenuBuilder {
   }
 }
 
-// Provide stable emojis proxy so `${emojis.name}` is always safe
 function makeEmojisProxy(nameToMeta = {}) {
   const map = Object.create(null);
   for (const [name, meta] of Object.entries(nameToMeta || {})) {
@@ -87,6 +87,8 @@ async function runExportJS(code, interaction, nameToMeta) {
   const _ButtonBuilder = SafeButtonBuilder;
   const _StringSelectMenuBuilder = SafeStringSelectMenuBuilder;
 
+  const body = `"use strict";\n${code}\n`;
+
   let fn;
   try {
     fn = new AsyncFunction(
@@ -99,7 +101,8 @@ async function runExportJS(code, interaction, nameToMeta) {
       'ButtonBuilder',
       'StringSelectMenuBuilder',
       'ButtonStyle',
-      'MessageFlags'
+      'MessageFlags',
+      body
     );
   } catch (compileErr) {
     const err = new Error('[runner] Compile error: ' + (compileErr?.message || String(compileErr)));
