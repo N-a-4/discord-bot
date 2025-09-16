@@ -24,8 +24,8 @@ ${emojis.game_small_gray} \`Наиграно\`: 145ч`),
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.lin1} **Пробыл**: 43 дня
-${emojis.a2} **Причина ухода**: По собственному желанию`),
+        .setContent(`${emojis.line_gray} **Пробыл**: 43 дня
+${emojis.angle_gray} **Причина ухода**: По собственному желанию`),
     )
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
   )
@@ -48,7 +48,7 @@ ${emojis.dot_yell} Занимается добычей ресурсов для �
         .setContent(`${emojis.role_mask_mix} **Электрик**
 ${emojis.dot_yell} Обустраивает базу всеми необходимыми электрическими системами`),
     )
-    .setButtonAccessory(btn => btn.setLabel("36 дней").setCustomId("mini:mini-hfypr7z#2").setStyle(ButtonStyle.Secondary))
+    .setButtonAccessory(btn => btn.setLabel("36 дней").setCustomId("mini:mini-hfypr7z").setStyle(ButtonStyle.Secondary))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -56,7 +56,7 @@ ${emojis.dot_yell} Обустраивает базу всеми необходи
         .setContent(`${emojis.role_mask_mix} **Билдер**
 ${emojis.dot_yell} Отвечает за проектирование, строительство и укрепление базы клана`),
     )
-    .setButtonAccessory(btn => btn.setLabel("4 дня").setCustomId("mini:mini-hfypr7z#3").setStyle(ButtonStyle.Secondary))
+    .setButtonAccessory(btn => btn.setLabel("4 дня").setCustomId("mini:mini-hfypr7z").setStyle(ButtonStyle.Secondary))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -69,7 +69,7 @@ ${emojis.dot_yell} Обеспечивает клан стабильным рес
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Роли").setCustomId("btn:btn-1757942491316").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.role_mask_mix.id }),
-      new ButtonBuilder().setLabel("Должности").setCustomId("mini:mini-hfypr7z#4").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.case_mix.id })
+      new ButtonBuilder().setLabel("Должности").setCustomId("mini:mini-hfypr7z").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.case_mix.id })
     )
   )
 await interaction.editReply({
