@@ -1,4 +1,3 @@
-const __setEmojiIf=(b,id)=>id?b.setEmoji({id}):b;
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
@@ -10,19 +9,13 @@ const exampleContainer = new ContainerBuilder()
       new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
     )
   )
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
-
-Это *пример* **текстового блока**`))
-  )
+  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
 
 Текст с кнопкой справа.`))
-    .setButtonAccessory(btn => btn.setLabel("ПРОВЕРКА КНОПКИ").setCustomId("btn:btn-1758026630664").setStyle(ButtonStyle.Secondary))
+    .setButtonAccessory(btn => btn.setLabel("Текстовая кнопка").setCustomId("btn:btn-1758027700088").setStyle(ButtonStyle.Secondary))
   )
-let selectRow;
-let buttonsRow;
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
