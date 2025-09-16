@@ -1,4 +1,4 @@
-// runner.js
+// runner.fix_1a.js
 const {
   ActionRowBuilder,
   ButtonBuilder,
@@ -8,31 +8,46 @@ const {
   ContainerBuilder,
   MediaGalleryItemBuilder,
   SeparatorSpacingSize,
+  DiscordAPIError,
 } = require('discord.js');
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
-function makeEmojiMap(nameToMeta = {}) {
-  const map = {};
-  for (const [name, meta] of Object.entries(nameToMeta)) {
-    const id = typeof meta === 'string' ? meta : meta?.id;
-    const animated = typeof meta === 'object' ? !!meta.animated : false;
-    map[name] = {
-      id,
-      animated,
-      name,
-      toString() {
-        if (!id) return name;
-        const prefix = animated ? 'a' : '';
-        return `<${prefix}:${name}:${id}>`;
-      },
-    };
+function makeEmojisProxy(nameToMeta = {}) {
+  const map = Object.create(null);
+  for (const [name, meta] of Object.entries(nameToMeta || {})) {
+    map[name] = { id: meta?.id || null, animated: !!meta?.animated };
   }
-  return map;
+  return new Proxy(map, {
+    get(target, prop) {
+      if (typeof prop !== 'string') return undefined;
+      const meta = target[prop] || { id: null, animated: false };
+      const o = { id: meta.id, animated: !!meta.animated };
+      Object.defineProperty(o, 'toString', {
+        value: () => (meta.id ? `<${meta.animated ? 'a' : ''}:${prop}:${meta.id}>` : `:${prop}:`),
+        enumerable: false,
+      });
+      return o;
+    }
+  });
 }
 
-async function runExportJS(code, interaction, emojiMap) {
-  const emojis = makeEmojiMap(emojiMap || {});
+function formatDiscordError(e) {
+  // Capture DiscordAPIError structure if present
+  const base = e && e.message ? e.message : String(e);
+  const extra = (e && typeof e === 'object' && e.rawError) ? e.rawError : null;
+  if (extra && extra.errors) {
+    try {
+      return base + ' | details: ' + JSON.stringify(extra.errors);
+    } catch {
+      return base;
+    }
+  }
+  return base;
+}
+
+async function runExportJS(code, interaction, nameToMeta) {
+  const emojis = makeEmojisProxy(nameToMeta || {});
   const body = `"use strict";\n${code}\n`;
 
   let fn;
@@ -47,12 +62,12 @@ async function runExportJS(code, interaction, emojiMap) {
       'ButtonBuilder',
       'StringSelectMenuBuilder',
       'ButtonStyle',
-      'MessageFlags',
-      body
+      'MessageFlags'
     );
   } catch (compileErr) {
-    const msg = compileErr?.message || String(compileErr);
-    throw new Error(`[runner] Failed to compile exported code: ${msg}`);
+    const err = new Error('[runner] Compile error: ' + (compileErr?.message || String(compileErr)));
+    err.cause = compileErr;
+    throw err;
   }
 
   try {
@@ -69,8 +84,8 @@ async function runExportJS(code, interaction, emojiMap) {
       MessageFlags
     );
   } catch (runtimeErr) {
-    const msg = runtimeErr?.message || String(runtimeErr);
-    const err = new Error(`[runner] Runtime error: ${msg}`);
+    const msg = formatDiscordError(runtimeErr);
+    const err = new Error('[runner] Runtime error: ' + msg);
     err.cause = runtimeErr;
     throw err;
   }
