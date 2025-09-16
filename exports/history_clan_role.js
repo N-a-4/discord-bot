@@ -11,7 +11,9 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
+
+
+
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
@@ -20,15 +22,15 @@ ${emojis.mic_small_gray} \`Общение\`: 364ч.
 ${emojis.game_small_gray} \`Наиграно\`: 145ч`),
     )
     .setThumbnailAccessory(thumb => thumb.setURL("https://i.ibb.co/m5Zj2zJf/ava-static.png"))
-  )
-  .addSectionComponents(section => section
+
+
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis.lin1} **Пробыл**: 43 дня
 ${emojis.a2} **Причина ухода**: По собственному желанию`),
     )
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
-  )
+
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(
     textDisplay => textDisplay
