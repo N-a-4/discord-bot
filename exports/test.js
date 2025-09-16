@@ -15,7 +15,6 @@ const exampleContainer = new ContainerBuilder()
 ${emojis.dot_gray} Приобретайте улучшения ваших баннеров`))
     .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id, name: emojiNameLiteral(b.emoji.name), animated: !!(emojiObjRef(b.emoji.name)).animated }))
   )
-
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
