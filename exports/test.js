@@ -10,19 +10,15 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-	
-  
-  
   .addTextDisplayComponents(
-		textDisplay => textDisplay
-			.setContent('### Партнерства'),
-	)
-
-
-
-
+    textDisplay => textDisplay
+      .setContent('### Партнерства'),
+  )
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.fire_purp} **Rustify** только выходит на арену, но мы уже готовим почву для мощных альянсов. Партнёрства — это вопрос времени, и мы точно знаем: впереди будет только жарче!`))
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.fire_purp} **Rustify** только выходит на арену, но мы уже готовим почву для мощных альянсов. Партнёрства — это вопрос времени, и мы точно знаем: впереди будет только жарче!`),
+    )
     .setButtonAccessory(btn => btn.setLabel("148").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id }))
   )
   .addActionRowComponents(row => row
@@ -32,38 +28,6 @@ const exampleContainer = new ContainerBuilder()
       new ButtonBuilder().setLabel("UKN ?").setCustomId("btn:btn-1758042438091").setStyle(ButtonStyle.Secondary)
     )
   )
-
-
-
-  module.exports = {
-    // data: new SlashCommandBuilder()...
-    async execute(interaction) {
-      const target = interaction.options.getUser('target');
-      const reason = interaction.options.getString('reason') ?? 'No reason provided';
-  
-      const confirm = new ButtonBuilder()
-        .setCustomId('confirm')
-        .setLabel('Confirm Ban')
-        .setStyle(ButtonStyle.Danger);
-  
-      const cancel = new ButtonBuilder()
-        .setCustomId('cancel')
-        .setLabel('Cancel')
-        .setStyle(ButtonStyle.Secondary);
-  
-      const row = new ActionRowBuilder()
-        .addComponents(cancel, confirm);
-  
-      await interaction.reply({
-        content: `Are you sure you want to ban ${target} for reason: ${reason}?`,
-        components: [row],
-      });
-    },
-  };
-
-
-
-  
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
