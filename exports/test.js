@@ -10,10 +10,9 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
-
-Текст с кнопкой справа.`))
-    .setButtonAccessory(btn => btn.setLabel("Кнопка").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.role_mask_mix.id }))
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.market} **Маркет**
+${emojis.dot_gray} Приобретайте улучшения ваших баннеров`))
+    .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id }))
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
