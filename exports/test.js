@@ -6,14 +6,14 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id, name: emojiNameLiteral(b.emoji.name), animated: !!(emojiObjRef(b.emoji.name)).animated })
+      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id })
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.market} **Маркет**
 ${emojis.dot_gray} Приобретайте улучшения ваших баннеров`))
-    .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id, name: emojiNameLiteral(b.emoji.name), animated: !!(emojiObjRef(b.emoji.name)).animated }))
+    .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id }))
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
