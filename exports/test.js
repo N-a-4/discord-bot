@@ -12,7 +12,7 @@ const exampleContainer = new ContainerBuilder()
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.
 And you can place one button or one thumbnail component next to it!`))
-    .setButtonAccessory(btn => btn.setLabel("Button inside a Section").setCustomId("btn:btn-1758032976941").setStyle(ButtonStyle.Secondary))
+    .setButtonAccessory(btn => btn.setLabel("Button inside a Section").setCustomId("btn:btn-1758033482148").setStyle(ButtonStyle.Secondary))
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
