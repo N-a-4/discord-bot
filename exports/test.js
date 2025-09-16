@@ -9,25 +9,10 @@ const exampleContainer = new ContainerBuilder()
       new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id })
     )
   )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
-
-Это *пример* **текстового блока**`))
-  )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.like} **Лайки** (124)
 ${emojis.dot_gray} Проверка работы блока`))
     .setButtonAccessory(btn => btn.setLabel("Перейти").setCustomId("btn:btn-1758034841531").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis["3score"].id }))
-  )
-  .addActionRowComponents(row => row
-    .addComponents(
-      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758034849076").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis["5score"].id }),
-      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758034943815").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setLabel("Кнопка 2").setCustomId("btn:btn-1758034944406").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setLabel("Кнопка 3").setCustomId("btn:btn-1758034945712").setStyle(ButtonStyle.Secondary)
-    )
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
