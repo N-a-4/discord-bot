@@ -12,9 +12,6 @@ const exampleContainer = new ContainerBuilder()
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
 
-Это *пример* **текстового блока**`))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
-
 Текст с кнопкой справа.`))
   .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("ПРОВЕРКА КНОПКИ").setCustomId("btn:btn-1758024806019").setStyle(ButtonStyle.Secondary)))
 await interaction.editReply({
