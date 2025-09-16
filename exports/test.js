@@ -10,12 +10,17 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-	.addTextDisplayComponents(
-		textDisplay => textDisplay
-			.setContent('### Партнерства'),
-	)
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.fire_purp} **Rustify** только выходит на арену, но мы уже готовим почву для мощных альянсов. Партнёрства — это вопрос времени, и мы точно знаем: впереди будет только жарче!`))
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent('### Партнерства'),
+    )
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.fire_purp} **Rustify** только выходит на арену, но мы уже готовим почву для мощных альянсов. Партнёрства — это вопрос времени, и мы точно знаем: впереди будет только жарче!`),
+    )
     .setButtonAccessory(btn => btn.setLabel("148").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id }))
   )
   .addActionRowComponents(row => row
