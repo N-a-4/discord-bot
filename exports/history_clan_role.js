@@ -68,13 +68,6 @@ ${emojis.dot_yell} Обеспечивает клан стабильным рес
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setCustomId("btn:btn-1757947448828").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_left.id }),
-      new ButtonBuilder().setLabel("1/2").setCustomId("btn:btn-1757947454918").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setCustomId("btn:btn-1757947476176").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_right.id })
-    )
-  )
-  .addActionRowComponents(row => row
-    .addComponents(
       new ButtonBuilder().setLabel("Роли").setCustomId("btn:btn-1757942491316").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.role_mask_mix.id }),
       new ButtonBuilder().setLabel("Должности").setCustomId("mini:mini-hfypr7z").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.case_mix.id })
     )
