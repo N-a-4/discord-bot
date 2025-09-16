@@ -1,3 +1,8 @@
+// helpers for safe text
+const __ensureStr = (v) => (typeof v === 'string' ? v : (v && v.toString ? v.toString() : String(v)));
+const __clampText = (s) => { s = __ensureStr(s); return s.length > 1800 ? s.slice(0, 1800) : s; };
+
+// container
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
@@ -6,16 +11,25 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id })
+      new ButtonBuilder()
+        .setLabel("Кнопка")
+        .setCustomId("btn:b1")
+        .setStyle(ButtonStyle.Secondary)
+        .setEmoji({ id: emojis.crown_mix.id })
     )
   )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(__clampText(`# Заголовок
+  .addSeparatorComponents(separator => 
+    separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large)
+  )
+  .addSectionComponents(section => 
+    section.addTextDisplayComponents(
+      textDisplay => textDisplay.setContent(__clampText(`# Заголовок
 
 Новый текстовый блок.`))
-  )
+    )
+  );
+
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
-})
+});
