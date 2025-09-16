@@ -21,7 +21,7 @@ const exampleContainer = new ContainerBuilder()
         .setLabel("Кнопка")
         .setCustomId("btn:b1")
         .setStyle(ButtonStyle.Secondary)
-        .setEmoji({ id: emojis.crown_mix?.id, animated: !!emojis.crown_mix?.animated })
+        .setEmoji({ id: emojis.crown_mix?.id, name: 'crown_mix', animated: !!emojis.crown_mix?.animated })
     )
   );
 
