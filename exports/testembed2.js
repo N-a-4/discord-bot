@@ -2,89 +2,24 @@ const __setEmojiIf=(b,id)=>id?b.setEmoji({id}):b;
 const exampleContainer = new ContainerBuilder()
   .addMediaGalleryComponents(mediaGallery => mediaGallery
     .addItems(
-      new MediaGalleryItemBuilder().setURL("https://i.ibb.co/39ynLZ21/5.png")
+      new MediaGalleryItemBuilder().setURL("https://i.ibb.co/gM3ZJYGt/vidget.png?ex=689d27e1&is=689bd661&hm=0ba370ab75ace8478cbcc6c596b0dda51c9a9dc41b055f881c3ef83371f7e094&=&format=webp&quality=lossless&width=1100&height=330")
     )
   )
   .addActionRowComponents(row => row
     .addComponents(
-      __setEmojiIf(new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary), emojis.back_purp.id),
-      __setEmojiIf(new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary), emojis.user_2_mix.id),
-      __setEmojiIf(new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1755604825553-gjw9").setStyle(ButtonStyle.Secondary), emojis.handshake_mix.id)
+      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.user_2_mix} **Игрок**: @username (\`.na4.\`)
-${emojis.steam_mix} **Steam**: Не подключен
-${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
-${emojis.balance} \`Баланс\`: Скоро`))
-    .setThumbnailAccessory(thumb => thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"))
-  )
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
-${emojis.a2} **Должность**: Заместитель`))
-  .addActionRowComponents(row => row.addComponents(__setEmojiIf(new ButtonBuilder().setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary), emojis.crown_mix.id)))
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### Клановая активность
-${emojis.mic_small_purple} **Общение с кланом**: 315ч.
-${emojis.dot_yell} \`За 7 дней\`: 65ч.
-${emojis.dot_yell} \`За 30 дней\`: 161ч.
+  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
 
-${emojis.gamepad_small_purple} **Наиграно в RUST**: 0ч.
-${emojis.dot_yell} \`За 7 дней\`: 0ч.
-${emojis.dot_yell} \`За 30 дней\`: 0ч.`))
-  .addActionRowComponents(row => row
-    .addComponents(
-      new ButtonBuilder().setLabel("Общая").setCustomId("mini:mini-9wvcu97").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setLabel("Клановая").setCustomId("btn:btn-1755093081717").setStyle(ButtonStyle.Secondary)
-    )
-  )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.stat_mix} **Статистика**
-${emojis.dot_gray} Боевые показатели игрока`))
-  .addActionRowComponents(row => row.addComponents(__setEmojiIf(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:sub-1755374150209-io3o").setStyle(ButtonStyle.Secondary), emojis.eye.id)))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.report} **Жалобы**
-${emojis.dot_gray} Просмотр нарушений и создание жалоб`))
-  .addActionRowComponents(row => row.addComponents(__setEmojiIf(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary), emojis.eye.id)))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis['24hours']} **История кланов**
-${emojis.dot_gray} Список кланов в которых состоял игрок`))
-  .addActionRowComponents(row => row.addComponents(__setEmojiIf(new ButtonBuilder().setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary), emojis.eye.id)))
+Это *пример* **текстового блока**`))
+  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
+
+Текст с кнопкой справа.`))
+  .addActionRowComponents(row => row.addComponents(new ButtonBuilder().setLabel("ПРОВЕРКА КНОПКИ").setCustomId("btn:btn-1758024633421").setStyle(ButtonStyle.Secondary)))
 let selectRow;
 let buttonsRow;
-// selectRow
-  selectRow = new ActionRowBuilder();
-  const sel = new StringSelectMenuBuilder().setCustomId("select").setPlaceholder("Поставьте оценку данному игроку");
-  const __opts = [];
-  {
-    const opt = { label: "5 — Отличный тиммейт", value: "5_—_отличный_тиммейт", description: "Надёжен, всегда помогает команде, выполняет договорённости, не бросает в бою." };
-    { const __id = emojis["5score"].id; if(__id) opt.emoji = { id: __id }; }
-    __opts.push(opt);
-  }
-  {
-    const opt = { label: "4 — Доверенный союзник", value: "4_—_доверенный_союзник", description: "Играет слаженно, выполняет свою роль, но может иногда действовать по-своему." };
-    { const __id = emojis["4score"].id; if(__id) opt.emoji = { id: __id }; }
-    __opts.push(opt);
-  }
-  {
-    const opt = { label: "3 — Обычный тиммейт", value: "3_—_обычный_тиммейт", description: "Не токсичен, не предаёт, но и не проявляет особой вовлечённости в командную игру." };
-    { const __id = emojis["3score"].id; if(__id) opt.emoji = { id: __id }; }
-    __opts.push(opt);
-  }
-  {
-    const opt = { label: "2 — Сложный игрок", value: "2_—_сложный_игрок", description: "Играет нестабильно, может вести себя неадекватно." };
-    { const __id = emojis["2score"].id; if(__id) opt.emoji = { id: __id }; }
-    __opts.push(opt);
-  }
-  {
-    const opt = { label: "1 — Опасный игрок", value: "1_—_опасный_игрок", description: "Может украсть лут, слить базу, специально мешать игре или предать в самый важный момент." };
-    { const __id = emojis["1score"].id; if(__id) opt.emoji = { id: __id }; }
-    __opts.push(opt);
-  }
-  if (__opts.length) sel.setOptions(...__opts);
-  selectRow.addComponents(sel);
-// buttonsRow
-  buttonsRow = new ActionRowBuilder();
-  buttonsRow.addComponents(__setEmojiIf(new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary), emojis.back_purp.id));
-  buttonsRow.addComponents(__setEmojiIf(new ButtonBuilder().setLabel("Закрыть").setCustomId("btn:btn-1755084324911").setStyle(ButtonStyle.Secondary), emojis.cross_purp.id));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
