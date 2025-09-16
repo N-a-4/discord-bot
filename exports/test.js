@@ -10,18 +10,21 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-
 	.addTextDisplayComponents(
 		textDisplay => textDisplay
-			.setContent('### Правила'),
+			.setContent('### Партнерства'),
 	)
-
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.market} **Маркет**
-${emojis.dot_gray} Приобретайте улучшения ваших баннеров`))
-    .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id }))
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.fire_purp} **Rustify** только выходит на арену, но мы уже готовим почву для мощных альянсов. Партнёрства — это вопрос времени, и мы точно знаем: впереди будет только жарче!`))
+    .setButtonAccessory(btn => btn.setLabel("148").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id }))
   )
-  
+  .addActionRowComponents(row => row
+    .addComponents(
+      new ButtonBuilder().setLabel("Общее").setCustomId("btn:btn-1758042422163").setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setLabel("RUST").setCustomId("btn:btn-1758042433810").setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setLabel("UKN ?").setCustomId("btn:btn-1758042438091").setStyle(ButtonStyle.Secondary)
+    )
+  )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer]
