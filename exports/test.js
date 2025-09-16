@@ -10,16 +10,17 @@ const exampleContainer = new ContainerBuilder()
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
+
+	.addTextDisplayComponents(
+		textDisplay => textDisplay
+			.setContent('### Правила'),
+	)
+
   .addSectionComponents(section => section
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.market} **Маркет**
 ${emojis.dot_gray} Приобретайте улучшения ваших баннеров`))
     .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1758036551909").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id }))
   )
-
-	.addTextDisplayComponents(
-		textDisplay => textDisplay
-			.setContent('This text is inside a Text Display component! You can use **any __markdown__** available inside this component too.'),
-	)
   
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
