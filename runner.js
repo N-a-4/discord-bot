@@ -1,4 +1,4 @@
-// runner.fix_1a.js
+// runner.fix_1b.js — safe builders + better diagnostics
 const {
   ActionRowBuilder,
   ButtonBuilder,
@@ -8,11 +8,45 @@ const {
   ContainerBuilder,
   MediaGalleryItemBuilder,
   SeparatorSpacingSize,
-  DiscordAPIError,
 } = require('discord.js');
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
+// ---- Safe wrappers ----
+class SafeButtonBuilder extends ButtonBuilder {
+  setEmoji(e) {
+    try {
+      if (!e || !e.id) return this;
+      return super.setEmoji(e);
+    } catch {
+      return this;
+    }
+  }
+}
+
+class SafeStringSelectMenuBuilder extends StringSelectMenuBuilder {
+  addOptions(...args) {
+    try {
+      // Flatten and sanitize emoji field
+      const flat = [];
+      for (const a of args) {
+        if (Array.isArray(a)) flat.push(...a);
+        else flat.push(a);
+      }
+      const cleaned = flat.map(o => {
+        if (!o || typeof o !== 'object') return o;
+        const c = { ...o };
+        if (c.emoji && (!c.emoji.id)) delete c.emoji;
+        return c;
+      });
+      return super.addOptions(cleaned);
+    } catch {
+      return super.addOptions(...args);
+    }
+  }
+}
+
+// Provide stable emojis proxy so `${emojis.name}` is always safe
 function makeEmojisProxy(nameToMeta = {}) {
   const map = Object.create(null);
   for (const [name, meta] of Object.entries(nameToMeta || {})) {
@@ -33,22 +67,25 @@ function makeEmojisProxy(nameToMeta = {}) {
 }
 
 function formatDiscordError(e) {
-  // Capture DiscordAPIError structure if present
-  const base = e && e.message ? e.message : String(e);
-  const extra = (e && typeof e === 'object' && e.rawError) ? e.rawError : null;
-  if (extra && extra.errors) {
-    try {
-      return base + ' | details: ' + JSON.stringify(extra.errors);
-    } catch {
-      return base;
+  try {
+    const base = e && e.message ? e.message : String(e);
+    const raw = e && e.rawError ? e.rawError : null;
+    if (raw && raw.errors) {
+      return base + ' | details: ' + JSON.stringify(raw.errors);
     }
+    return base;
+  } catch {
+    return String(e);
   }
-  return base;
 }
 
 async function runExportJS(code, interaction, nameToMeta) {
   const emojis = makeEmojisProxy(nameToMeta || {});
-  const body = `"use strict";\n${code}\n`;
+
+  // Use safe builders consistently
+  const _ActionRowBuilder = ActionRowBuilder;
+  const _ButtonBuilder = SafeButtonBuilder;
+  const _StringSelectMenuBuilder = SafeStringSelectMenuBuilder;
 
   let fn;
   try {
@@ -77,9 +114,9 @@ async function runExportJS(code, interaction, nameToMeta) {
       ContainerBuilder,
       MediaGalleryItemBuilder,
       SeparatorSpacingSize,
-      ActionRowBuilder,
-      ButtonBuilder,
-      StringSelectMenuBuilder,
+      _ActionRowBuilder,
+      _ButtonBuilder,
+      _StringSelectMenuBuilder,
       ButtonStyle,
       MessageFlags
     );
