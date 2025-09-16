@@ -28,22 +28,22 @@ ${emojis.a2} **Причина ухода**: По собственному жел
     .addTextDisplayComponents(textDisplay => textDisplay.setContent(`### Время пребывания на должностях`))
   )
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.position} **Глава клана**
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.case_mix} **Глава клана**
 ${emojis.dot_purp} Руководит кланом, принимает ключевые решения`))
     .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1756053395927").setStyle(ButtonStyle.Secondary))
   )
   .addSectionComponents(section => section
-    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.position} **Заместитель**
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emojis.case_mix} **Заместитель**
 ${emojis.dot_purp} Помогает Главе управлять кланом и принимает решения в его отсутствии`))
     .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1756053621278").setStyle(ButtonStyle.Secondary))
   )
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Роли").setCustomId("mini:mini-cnwhrpj").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.role_mask_mix.id }),
-      new ButtonBuilder().setLabel("Должности").setCustomId("btn:btn-1757941770768").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.position.id })
+      new ButtonBuilder().setLabel("Должности").setCustomId("btn:btn-1757941770768").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.case_mix.id })
     )
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
-  components: [exampleContainer]
+  components: [exampleContainer, selectRow, buttonsRow]
 })
