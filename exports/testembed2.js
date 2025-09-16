@@ -10,13 +10,17 @@ const exampleContainer = new ContainerBuilder()
       new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
     )
   )
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
 
 Это *пример* **текстового блока**`))
-  .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Заголовок
 
 Текст с кнопкой справа.`))
-  .setButtonAccessory(btn => btn.setLabel("ПРОВЕРКА КНОПКИ").setCustomId("btn:btn-1758025086297").setStyle(ButtonStyle.Secondary))
+    .setButtonAccessory(btn => btn.setLabel("ПРОВЕРКА КНОПКИ").setCustomId("btn:btn-1758026630664").setStyle(ButtonStyle.Secondary))
+  )
 let selectRow;
 let buttonsRow;
 await interaction.editReply({
