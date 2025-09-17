@@ -24,8 +24,8 @@ ${emojis.game_small_gray} \`Наиграно\`: 145ч`),
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.lin1} **Пробыл**: 43 дня
-${emojis.a2} **Причина ухода**: По собственному желанию`),
+        .setContent(`${emojis.line_gray} **Пробыл**: 43 дня
+${emojis.angle_gray} **Причина ухода**: По собственному желанию`),
     )
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
   )
