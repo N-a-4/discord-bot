@@ -31,9 +31,10 @@ ${emojis.a2} **Должность**: Заместитель`),
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addTextDisplayComponents(
-    textDisplay => textDisplay
-      .setContent(`### Клановая активность
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`### Клановая активность
 ${emojis.mic_small_purple} **Общение с кланом**: 315ч.
 ${emojis.dot_yell} \`За 7 дней\`: 65ч.
 ${emojis.dot_yell} \`За 30 дней\`: 161ч.
@@ -41,6 +42,8 @@ ${emojis.dot_yell} \`За 30 дней\`: 161ч.
 ${emojis.gamepad_small_purple} **Наиграно в RUST**: 0ч.
 ${emojis.dot_yell} \`За 7 дней\`: 0ч.
 ${emojis.dot_yell} \`За 30 дней\`: 0ч.`),
+    )
+    .setThumbnailAccessory(thumb => thumb.setURL("https://cdn.discordapp.com/emojis/1351058159879589950.webp?size=128&animated=true"))
   )
   .addActionRowComponents(row => row
     .addComponents(
