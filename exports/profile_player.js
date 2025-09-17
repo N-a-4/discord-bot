@@ -6,8 +6,8 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("BiG").setCustomId("btn:btn-1754860305089").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }).setDisabled(true),
-      new ButtonBuilder().setLabel("Участники").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.members_mix.id }),
+      new ButtonBuilder().setLabel("BiG3").setCustomId("btn:btn-1754860305089").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }).setDisabled(true),
+      new ButtonBuilder().setLabel("Игроки").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.members_mix.id }),
       new ButtonBuilder().setLabel("Группы").setCustomId("btn:btn-1758118590500").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.clanstaff.id })
     )
   )
