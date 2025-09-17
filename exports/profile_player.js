@@ -7,7 +7,7 @@ const exampleContainer = new ContainerBuilder()
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.back_purp.id }),
-      new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id }),
+      new ButtonBuilder().setLabel("Профиль").setCustomId("btn:btn-1754934461264").setStyle(ButtonStyle.Secondary).setDisabled(true),
       new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1755604825553-gjw9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.handshake_mix.id })
     )
   )
@@ -28,7 +28,7 @@ ${emojis.balance} \`Баланс\`: Скоро`),
         .setContent(`${emojis.crown_mix} **Клан**: **[BiG](https:///adasd.com/)**
 ${emojis.a2} **Должность**: Заместитель`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
+    .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(
@@ -45,7 +45,7 @@ ${emojis.dot_yell} \`За 30 дней\`: 0ч.`),
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Общая").setCustomId("mini:mini-9wvcu97").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setLabel("Клановая").setCustomId("btn:btn-1755093081717").setStyle(ButtonStyle.Secondary)
+      new ButtonBuilder().setLabel("Клановая").setCustomId("btn:btn-1755093081717").setStyle(ButtonStyle.Secondary).setDisabled(true)
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
@@ -60,18 +60,18 @@ ${emojis.dot_gray} Боевые показатели игрока`),
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.report} **Жалобы**
-${emojis.dot_gray} Просмотр нарушений и создание жалоб`),
-    )
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
-  )
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(
-      textDisplay => textDisplay
         .setContent(`${emojis['24hours']} **История кланов**
 ${emojis.dot_gray} Список кланов в которых состоял игрок`),
     )
     .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:sub-1755357504688-2489").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.report} **Жалобы**
+${emojis.dot_gray} Просмотр нарушений и создание жалоб`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("embed:embed-mefmj95w-kyz4n").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.eye.id }))
   )
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
