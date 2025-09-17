@@ -66,6 +66,45 @@ ${emojis.dot_yell} Обеспечивает клан стабильным рес
     )
     .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1757942268834").setStyle(ButtonStyle.Secondary))
   )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Трубопроводчик**
+${emojis.dot_yell} Отвечает за прокладку труб и настройку всех механических систем`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758093916027").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Комбат**
+${emojis.dot_yell} Основной боец клана, участвует в PvP, защищает базу, а также помогает в рейдах и вылазках`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758094701523").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Пилот**
+${emojis.dot_yell} Управляет воздушным транспортом клана, доставляет бойцов, ресурсы и обеспечивает мобильность при рейдах и вылазках`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758094747675").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Коллер**
+${emojis.dot_yell} Координирует действия команды в бою, отвечает за связь и принятие быстрых решений`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758097862884").setStyle(ButtonStyle.Secondary))
+  )
+  .addActionRowComponents(row => row
+    .addComponents(
+      new ButtonBuilder().setCustomId("btn:btn-1758093943148").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_left.id }),
+      new ButtonBuilder().setLabel("1/2").setCustomId("btn:btn-1758093926039").setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setCustomId("btn:btn-1758093935443").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_right.id })
+    )
+  )
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Роли").setCustomId("btn:btn-1757942491316").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.role_mask_mix.id }),
