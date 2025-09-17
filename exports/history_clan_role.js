@@ -24,8 +24,8 @@ ${emojis.game_small_gray} \`Наиграно\`: 145ч`),
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.line_gray} **Пробыл**: 43 дня
-${emojis.angle_gray} **Причина ухода**: По собственному желанию`),
+        .setContent(`${emojis.lin1} **Пробыл**: 43 дня
+${emojis.a2} **Причина ухода**: По собственному желанию`),
     )
     .setButtonAccessory(btn => btn.setLabel("Профиль клана").setCustomId("embed:embed-1754860281662").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }))
   )
@@ -65,6 +65,37 @@ ${emojis.dot_yell} Отвечает за проектирование, стро�
 ${emojis.dot_yell} Обеспечивает клан стабильным ресурсом еды и трав`),
     )
     .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1757942268834").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Трубопроводчик**
+${emojis.dot_yell} Отвечает за прокладку труб и настройку всех механических систем`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758093916027").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Комбат**
+${emojis.dot_yell} Основной боец клана, участвует в PvP, защищает базу, а также помогает в рейдах и вылазках`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758094701523").setStyle(ButtonStyle.Secondary))
+  )
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`${emojis.role_mask_mix} **Пилот**
+${emojis.dot_yell} Управляет воздушным транспортом клана, доставляет бойцов, ресурсы и обеспечивает мобильность при рейдах и вылазках`),
+    )
+    .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758094747675").setStyle(ButtonStyle.Secondary))
+  )
+  .addActionRowComponents(row => row
+    .addComponents(
+      new ButtonBuilder().setCustomId("btn:btn-1758093943148").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_left.id }),
+      new ButtonBuilder().setLabel("1/2").setCustomId("btn:btn-1758093926039").setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setCustomId("btn:btn-1758093935443").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_right.id })
+    )
   )
   .addActionRowComponents(row => row
     .addComponents(
