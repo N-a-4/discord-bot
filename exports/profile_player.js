@@ -43,7 +43,7 @@ ${emojis.gamepad_small_purple} **Наиграно в RUST**: 0ч.
 ${emojis.dot_yell} \`За 7 дней\`: 0ч.
 ${emojis.dot_yell} \`За 30 дней\`: 0ч.`),
     )
-    .setThumbnailAccessory(thumb => thumb.setURL("https://cdn.discordapp.com/emojis/1351058159879589950.webp?size=128&animated=true"))
+    .setThumbnailAccessory(thumb => thumb.setURL("https://cdn.discordapp.com/emojis/1417826866663788614.webp?size=128&animated=true"))
   )
   .addActionRowComponents(row => row
     .addComponents(
