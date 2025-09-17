@@ -6,9 +6,9 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setCustomId("embed:embed-1754855220162").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.back_purp.id }),
-      new ButtonBuilder().setLabel("BiG").setCustomId("btn:btn-1754860305089").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.discord_mix.id }).setDisabled(true),
-      new ButtonBuilder().setLabel("Участники").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.members_mix.id })
+      new ButtonBuilder().setLabel("BiG").setCustomId("btn:btn-1754860305089").setStyle(ButtonStyle.Secondary).setDisabled(true),
+      new ButtonBuilder().setLabel("Участники").setCustomId("embed:sub-1754942674709-psz9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.members_mix.id }),
+      new ButtonBuilder().setLabel("Группы").setCustomId("btn:btn-1758118590500").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.clanstaff.id })
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
@@ -25,32 +25,10 @@ ${emojis.bank} \`Банк\`: Скоро`),
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.bigdot_yell} **Набор открыт**
-${emojis.dot_yell} Клан принимает заявки на вступление`),
+        .setContent(`${emojis.bigdot_yell} **Голосовое общение**
+${emojis.dot_yell} Основная комната для переговоров`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Discord").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.discord_mix.id }))
-  )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(
-      textDisplay => textDisplay
-        .setContent(`### Общая активность
-${emojis.mic_small_purple} **Общение**: 3241ч.
-${emojis.dot_yell} \`За 7 дней\`: 281ч.
-${emojis.dot_yell} \`За 30 дней\`: 674ч.
-
-${emojis.gamepad_small_purple} **Проведено в игре**: 4141ч.
-${emojis.dot_yell} \`За 7 дней\`: 781ч.
-${emojis.dot_yell} \`За 30 дней\`: 3772ч.`),
-    )
-    .setThumbnailAccessory(thumb => thumb.setURL("https://i.ibb.co/Rp34ygMQ/stat-mix.gif"))
-  )
-  .addActionRowComponents(row => row
-    .addComponents(
-      new ButtonBuilder().setLabel("Общее").setCustomId("btn:btn-1757935693368").setStyle(ButtonStyle.Secondary).setDisabled(true),
-      new ButtonBuilder().setLabel("RUST").setCustomId("mini:mini-j6j01qx").setStyle(ButtonStyle.Secondary),
-      new ButtonBuilder().setLabel("UKN ?").setCustomId("mini:mini-2y3h3ho").setStyle(ButtonStyle.Secondary)
-    )
+    .setButtonAccessory(btn => btn.setLabel("Подключиться").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Link))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
