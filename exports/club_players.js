@@ -7,7 +7,7 @@ const exampleContainer = new ContainerBuilder()
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Клан").setCustomId("embed:embed-1754855220162").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }),
-      new ButtonBuilder().setLabel("Игроки").setCustomId("btn:btn-1754859186686").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id })
+      new ButtonBuilder().setLabel("Игроки").setCustomId("btn:btn-1754859186686").setDisabled(true).setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id })
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
