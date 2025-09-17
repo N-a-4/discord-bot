@@ -28,17 +28,20 @@ ${emojis.bank} \`Банк\`: Скоро`),
         .setContent(`${emojis.bigdot_yell} **Набор открыт**
 ${emojis.dot_yell} Клан принимает заявки на вступление`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Discord").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Link))
+    .setButtonAccessory(btn => btn.setLabel("Discord").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Secondary))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addTextDisplayComponents(
-    textDisplay => textDisplay
-      .setContent(`### Игровые показатели
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`### Игровые показатели
 ${emojis.kd_mix} \`KDR\`: 0.65
 ${emojis.headshot_mix} \`Хэдшоты\`: 30%
 ${emojis.helping_purp} \`Воскрешений\`: 295
 ${emojis.bullet_mix} \`Точность\`: 13%
 ${emojis.info_yell} Важно понимать, что игроки без подключённого Steam-аккаунта искажают общий результат`),
+    )
+    .setThumbnailAccessory(thumb => thumb.setURL("https://i.ibb.co/Rp34ygMQ/stat-mix.gif"))
   )
   .addActionRowComponents(row => row
     .addComponents(
