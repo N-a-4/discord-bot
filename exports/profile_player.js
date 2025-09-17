@@ -41,7 +41,7 @@ ${emojis.helping_purp} \`Воскрешений\`: 295
 ${emojis.bullet_mix} \`Точность\`: 13%
 ${emojis.info_yell} Важно понимать, что игроки без подключённого Steam-аккаунта искажают общий результат`),
     )
-    .setThumbnailAccessory(thumb => thumb.setURL("https://cdn.discordapp.com/emojis/1351058159879589950.webp?size=128&animated=true"))
+    .setThumbnailAccessory(thumb => thumb.setURL("https://i.ibb.co/Rp34ygMQ/stat-mix.gif"))
   )
   .addActionRowComponents(row => row
     .addComponents(
