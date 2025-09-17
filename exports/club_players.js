@@ -7,7 +7,7 @@ const exampleContainer = new ContainerBuilder()
   .addActionRowComponents(row => row
     .addComponents(
       new ButtonBuilder().setLabel("Клан").setCustomId("embed:embed-1754855220162").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }),
-      new ButtonBuilder().setLabel("Игроки").setCustomId("btn:btn-1754859186686").setDisabled(true).setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id })
+      new ButtonBuilder().setLabel("Игроки").setCustomId("btn:btn-1754859186686").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user_2_mix.id }).setDisabled(true)
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
@@ -62,8 +62,8 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setCustomId("btn:btn-1754861533006").setStyle(ButtonStyle.Secondary).setDisabled(true).setEmoji({ id: emojis.arrow_yell_left.id }),
-      new ButtonBuilder().setLabel("1/157").setCustomId("btn:btn-1754861563538").setDisabled(true).setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder().setCustomId("btn:btn-1754861533006").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_left.id }).setDisabled(true),
+      new ButtonBuilder().setLabel("1/157").setCustomId("btn:btn-1754861563538").setStyle(ButtonStyle.Secondary).setDisabled(true),
       new ButtonBuilder().setCustomId("btn:btn-1754861580945").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.arrow_yell_right.id }),
       new ButtonBuilder().setLabel("Поиск").setCustomId("modal:m_0w97ljz").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.search.id }),
       new ButtonBuilder().setCustomId("mini:mini-pmfms78").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.filter_yell.id })
