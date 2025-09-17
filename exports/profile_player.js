@@ -28,7 +28,7 @@ ${emojis.bank} \`Банк\`: Скоро`),
         .setContent(`${emojis.bigdot_yell} **Голосовое общение**
 ${emojis.dot_yell} Основная комната для переговоров`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Подключиться").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Link))
+    .setButtonAccessory(btn => btn.setLabel("Подключиться").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Secondary))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
