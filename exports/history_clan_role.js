@@ -46,7 +46,7 @@ ${emojis.dot_yell} Отвечает за прокладку труб и наст
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis.role_mask_mix} **Комбат**
-${emojis.dot_yell} Основной боец клана, защищает базу, а также помогает в рейдах и вылазках`),
+${emojis.dot_yell} Основной боец клана. Защищает базу, помогает в рейдах и вылазках`),
     )
     .setButtonAccessory(btn => btn.setLabel("0 дней").setCustomId("btn:btn-1758094701523").setStyle(ButtonStyle.Secondary))
   )
