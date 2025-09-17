@@ -28,17 +28,20 @@ ${emojis.bank} \`Банк\`: Скоро`),
         .setContent(`${emojis.bigdot_yell} **Набор открыт**
 ${emojis.dot_yell} Клан принимает заявки на вступление`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Discord").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.discord_purple.id }))
+    .setButtonAccessory(btn => btn.setLabel("Discord").setCustomId("mini:mini-g33re7j").setStyle(ButtonStyle.Link))
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addTextDisplayComponents(
-    textDisplay => textDisplay
-      .setContent(`### Игровые показатели
+  .addSectionComponents(section => section
+    .addTextDisplayComponents(
+      textDisplay => textDisplay
+        .setContent(`### Игровые показатели
 ${emojis.kd_mix} \`KDR\`: 0.65
 ${emojis.headshot_mix} \`Хэдшоты\`: 30%
 ${emojis.helping_purp} \`Воскрешений\`: 295
 ${emojis.bullet_mix} \`Точность\`: 13%
 ${emojis.info_yell} Важно понимать, что игроки без подключённого Steam-аккаунта искажают общий результат`),
+    )
+    .setThumbnailAccessory(thumb => thumb.setURL("https://cdn.discordapp.com/emojis/1351058159879589950.webp?size=128&animated=true"))
   )
   .addActionRowComponents(row => row
     .addComponents(
