@@ -4,19 +4,19 @@ const exampleContainer = new ContainerBuilder()
       new MediaGalleryItemBuilder().setURL("https://i.ibb.co/gM3ZJYGt/vidget.png")
     )
   )
-  .addSectionComponents(section => section
+
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis['24hours']} **Ежедневный бонус**
 ${emojis.dot_purp} Забирайте **25**${emojis.rusticoin} ежедневно`),
     )
     .setButtonAccessory(btn => btn.setLabel("Получить").setCustomId("embed:sub-1755323150368-hyj9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.coins.id }))
-  )
+  
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis.star_anim_yell} **Новый уровень**
-${emojis.dot_purp} Получайте растикоины каждый раз когда достигаете новый уровень`),
+${emojis.dot_purp} Получайте РастиКоины каждый раз когда достигаете новый уровень`),
     )
     .setButtonAccessory(btn => btn.setLabel("Получить").setCustomId("btn:btn-titfdx").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.coins.id }).setDisabled(true))
   )
