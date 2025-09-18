@@ -6,7 +6,7 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
+      new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.report.id })
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
@@ -19,8 +19,12 @@ let selectRow;
 let buttonsRow;
 // selectRow
   selectRow = new ActionRowBuilder();
-  const sel = new StringSelectMenuBuilder().setCustomId("f-list-464q23").setPlaceholder("Выберите вариант").addOptions({ label: "Вариант 1", value: "вариант_1" }, { label: "Вариант 2", value: "вариант_2" }, { label: "Вариант 3", value: "вариант_3" });
+  const sel = new StringSelectMenuBuilder().setCustomId("f-list-464q23").setPlaceholder("Выберите вариант").addOptions({ label: "Вариант 1", value: "вариант_1", description: "Test1", emoji: { id: emojis.report.id } }, { label: "Вариант 2", value: "вариант_2", description: "Test2", emoji: { id: emojis.report.id } }, { label: "Вариант 3", value: "вариант_3", description: "Test3", emoji: { id: emojis.report.id } });
   selectRow.addComponents(sel);
+// buttonsRow
+  buttonsRow = new ActionRowBuilder();
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758220668122").setStyle(ButtonStyle.Secondary));
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758220679923").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer, selectRow, buttonsRow].filter(Boolean)
