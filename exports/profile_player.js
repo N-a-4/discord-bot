@@ -29,7 +29,7 @@ ${emojis.info_yell} Если у вас возникли **трудности с 
         .setContent(`${emojis.chat} **Вопрос #571**
 ${emojis.dot_yell} Тикет открыт: \`26/04/25\``),
     )
-    .setButtonAccessory(btn => btn.setLabel("Перейти").setCustomId("btn:btn-8hmf0g").setURL('https://discord.gg/rustify').setStyle(ButtonStyle.Link).setEmoji({ id: emojis.bigdot_purp.id }))
+    .setButtonAccessory(btn => btn.setLabel("Перейти").setURL("https://discord.gg/rustify").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.bigdot_purp.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -37,7 +37,7 @@ ${emojis.dot_yell} Тикет открыт: \`26/04/25\``),
         .setContent(`${emojis.report} **Жалоба #184**
 ${emojis.dot_red} Тикет открыт: \`26/04/25\``),
     )
-    .setButtonAccessory(btn => btn.setLabel("Перейти").setCustomId("btn:btn-1755349286038").setURL('https://discord.gg/rustify').setStyle(ButtonStyle.Link).setEmoji({ id: emojis.bigdot_purp.id }))
+    .setButtonAccessory(btn => btn.setLabel("Перейти").setURL("https://discord.gg/rustify").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.bigdot_purp.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -45,7 +45,7 @@ ${emojis.dot_red} Тикет открыт: \`26/04/25\``),
         .setContent(`${emojis.chat} **Вопрос #571**
 ${emojis.dot_yell} Тикет закрыт: \`03/03/25\``),
     )
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("btn:btn-859w4x").setURL('https://discord.gg/rustify').setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => btn.setLabel("Смотреть").setURL("https://discord.gg/rustify").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -53,7 +53,7 @@ ${emojis.dot_yell} Тикет закрыт: \`03/03/25\``),
         .setContent(`${emojis.chat} **Вопрос #341**
 ${emojis.dot_yell} Тикет закрыт: \`14/01/25\``),
     )
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("btn:btn-1755349361324").setURL('https://discord.gg/rustify').setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => btn.setLabel("Смотреть").setURL("https://discord.gg/rustify").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
@@ -61,7 +61,7 @@ ${emojis.dot_yell} Тикет закрыт: \`14/01/25\``),
         .setContent(`${emojis.report} **Жалоба #184**
 ${emojis.dot_red} Тикет закрыт: \`18/12/24\``),
     )
-    .setButtonAccessory(btn => btn.setLabel("Смотреть").setCustomId("btn:btn-1755349436524").setURL('https://discord.gg/rustify').setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
+    .setButtonAccessory(btn => btn.setLabel("Смотреть").setURL("https://discord.gg/rustify").setStyle(ButtonStyle.Link).setEmoji({ id: emojis.eye.id }))
   )
   .addActionRowComponents(row => row
     .addComponents(
