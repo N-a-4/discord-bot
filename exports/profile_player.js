@@ -25,6 +25,7 @@ let buttonsRow;
   buttonsRow = new ActionRowBuilder();
   buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758220668122").setStyle(ButtonStyle.Secondary));
   buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758220679923").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.crown_mix.id }));
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:btn-1758220762734").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_lime.id }).setDisabled(true));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer, selectRow, buttonsRow].filter(Boolean)
