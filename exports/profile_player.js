@@ -17,6 +17,10 @@ const exampleContainer = new ContainerBuilder()
   )
 let selectRow;
 let buttonsRow;
+// selectRow
+  selectRow = new ActionRowBuilder();
+  const sel = new StringSelectMenuBuilder().setCustomId("f-list-464q23").setPlaceholder("Выберите вариант").addOptions({ label: "Вариант 1", value: "вариант_1" }, { label: "Вариант 2", value: "вариант_2" }, { label: "Вариант 3", value: "вариант_3" });
+  selectRow.addComponents(sel);
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
   components: [exampleContainer, selectRow, buttonsRow].filter(Boolean)
