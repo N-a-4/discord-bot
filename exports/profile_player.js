@@ -9,9 +9,10 @@ const exampleContainer = new ContainerBuilder()
       new ButtonBuilder().setLabel("Кнопка").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary)
     )
   )
+  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addActionRowComponents(row => row
     .addComponents(
-      new StringSelectMenuBuilder().setCustomId("list-qqvoe2").setPlaceholder("Выберите вариант").addOptions({ label: "Вариант 1", value: "вариант_1" }, { label: "Вариант 2", value: "вариант_2" }, { label: "Вариант 3", value: "вариант_3" })
+      new StringSelectMenuBuilder().setCustomId("list-qqvoe2").setPlaceholder("Проверка").addOptions({ label: "Вариант 1", value: "вариант_1", description: "Test1", emoji: { id: emojis.crown_mix.id } }, { label: "Вариант 2", value: "вариант_2", description: "Test2", emoji: { id: emojis.user.id } }, { label: "Вариант 3", value: "вариант_3", description: "Test3", emoji: { id: emojis.report.id } })
     )
   )
 let selectRow;
