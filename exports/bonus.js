@@ -8,7 +8,7 @@ const exampleContainer = new ContainerBuilder()
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis['24hours']} **Ежедневный бонус**
-${emojis.dot_purp} Забирайте **25**${emojis.rusticoin} ежедневно`),
+${emojis.dot_purp} Забирайте **25**${emojis.rusticoin}ежедневно`),
     )
     .setButtonAccessory(btn => btn.setLabel("Получить").setCustomId("embed:sub-1755323150368-hyj9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.coins.id }))
   )
@@ -16,7 +16,7 @@ ${emojis.dot_purp} Забирайте **25**${emojis.rusticoin} ежедневн
     .addTextDisplayComponents(
       textDisplay => textDisplay
         .setContent(`${emojis.star_anim_yell} **Новый уровень**
-${emojis.dot_purp} Получайте **10**${emojis.rusticoin}  каждый раз когда достигаете новый уровень`),
+${emojis.dot_purp} Получайте **10**${emojis.rusticoin}каждый раз когда достигаете новый уровень`),
     )
     .setButtonAccessory(btn => btn.setLabel("Получить").setCustomId("btn:btn-titfdx").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.coins.id }).setDisabled(true))
   )
