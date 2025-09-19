@@ -1,20 +1,16 @@
-// commands/reload_embeds.js
-// Slash command to reload embeds imported via exports/incoming/*
-// Usage: /reload_embeds
-// Permissions: admin only (adjust as needed)
-
+// commands/reload_embeds.js — Slash version
 const fs = require('fs');
 const path = require('path');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { requireFresh } = require('../utils/requireFresh');
 
 module.exports = {
-  data: {
-    name: 'reload_embeds',
-    description: 'Reload imported embed files from exports/incoming',
-  },
+  data: new SlashCommandBuilder()
+    .setName('reload_embeds')
+    .setDescription('Reload imported embed files from exports/incoming')
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     try {
-      // TODO: check admin permission if needed
       const incomingDir = path.join(__dirname, '..', 'exports', 'incoming');
       if (!fs.existsSync(incomingDir)) {
         return interaction.reply({ content: 'Нет папки exports/incoming — нечего перезагружать', ephemeral: true });
@@ -26,7 +22,6 @@ module.exports = {
       for (const f of files) {
         const full = path.join(incomingDir, f);
         try {
-          // Try requiring to ensure syntax is fine; side-effects are under your control in exporter
           requireFresh(full);
           ok++;
         } catch (e) {
