@@ -4,8 +4,10 @@ const express = require('express');
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const Registry = require('./fs-registry');
 const { loadApplicationEmojis } = require('./resolveEmojisByName');
+const embedImportRoute = require('./routes/embedImport');
 
 const app = express();
+app.use('/api', embedImportRoute);
 app.get('/health', (_req, res) => res.json({ ok: true }));
 app.get('/exports', (_req, res) => res.json({ exports: Registry.list() }));
 
@@ -14,13 +16,15 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 // Commands
 const rustify = require('./commands/rustify');
 const appemojis = require('./commands/emojis');
+const reloadEmbeds = require('./commands/reload_embeds'); // <-- added
 client.commands = new Collection();
 client.commands.set(rustify.data.name, rustify);
 client.commands.set(appemojis.data.name, appemojis);
+client.commands.set(reloadEmbeds.data.name, reloadEmbeds); // <-- added
 
 async function registerSlash() {
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-  const data = [rustify.data.toJSON(), appemojis.data.toJSON()];
+  const data = [rustify.data.toJSON(), appemojis.data.toJSON(), reloadEmbeds.data.toJSON()]; // <-- added
   const route = process.env.GUILD_ID
     ? Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID)
     : Routes.applicationCommands(process.env.CLIENT_ID);
