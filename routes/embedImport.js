@@ -1,7 +1,7 @@
 // routes/embedImport.js
-// Webhook endpoint to receive exported embed code from the Builder and save it into exports/incoming/
-// Security: requires header "x-embed-token" matching process.env.EMBED_IMPORT_TOKEN
-// CORS: allow configured origin (EMBED_CORS_ORIGIN) or "*" in dev
+// Receives exported embed code from the Builder and saves it into exports/incoming/
+// Security: x-embed-token or Authorization: Bearer <token> must match EMBED_IMPORT_TOKEN
+// CORS: EMBED_CORS_ORIGIN or "*" (dev). Optional auto-reload via Registry.reloadEmbeds().
 
 const express = require('express');
 const fs = require('fs');
@@ -9,23 +9,35 @@ const path = require('path');
 
 const router = express.Router();
 
-// CORS (keep it route-local so we don't affect other routes)
+// local JSON body parser (limit 5mb)
+router.use(express.json({ limit: '5mb' }));
+
+// route-local CORS
 router.use((req, res, next) => {
-  const origin = process.env.EMBED_CORS_ORIGIN || '*';
-  res.header('Access-Control-Allow-Origin', origin);
-  res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, x-embed-token');
+  const allow = process.env.EMBED_CORS_ORIGIN || '*';
+  res.setHeader('Access-Control-Allow-Origin', allow);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-embed-token');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
 
-router.post('/embed/import', express.json({ limit: '2mb' }), (req, res) => {
+function extractToken(req) {
+  const hdr = req.headers['authorization'];
+  if (hdr && /^Bearer\s+/i.test(hdr)) return hdr.replace(/^Bearer\s+/i, '').trim();
+  const x = req.headers['x-embed-token'];
+  if (x) return String(x).trim();
+  return null;
+}
+
+router.post('/exports/import', async (req, res) => {
   try {
-    const token = req.get('x-embed-token');
-    if (!process.env.EMBED_IMPORT_TOKEN) {
-      return res.status(500).json({ ok: false, error: 'Server missing EMBED_IMPORT_TOKEN' });
-    }
-    if (token !== process.env.EMBED_IMPORT_TOKEN) {
+    const requiredToken = process.env.EMBED_IMPORT_TOKEN;
+    if (!requiredToken) return res.status(500).json({ ok: false, error: 'Server misconfigured: no EMBED_IMPORT_TOKEN' });
+
+    const token = extractToken(req);
+    if (!token || token !== requiredToken) {
       return res.status(401).json({ ok: false, error: 'Unauthorized' });
     }
 
@@ -34,21 +46,40 @@ router.post('/embed/import', express.json({ limit: '2mb' }), (req, res) => {
       return res.status(400).json({ ok: false, error: 'filename and code are required' });
     }
 
-    // sanitize filename
     const safeName = String(filename).replace(/[^a-z0-9._-]/gi, '_');
-    const outDir = path.join(__dirname, '..', 'exports', 'incoming');
-    fs.mkdirSync(outDir, { recursive: true });
-    const outPath = path.join(outDir, safeName);
+    const incomingDir = path.join(__dirname, '..', 'exports', 'incoming');
+    fs.mkdirSync(incomingDir, { recursive: true });
+    const filePath = path.join(incomingDir, safeName);
 
-    fs.writeFileSync(outPath, code, 'utf8');
+    fs.writeFileSync(filePath, code, 'utf8');
 
-    // Optionally: attach a small meta json next to the file
-    const meta = { projectId: projectId || null, embedId: embedId || null, at: new Date().toISOString(), by: notifyUserId || null };
-    fs.writeFileSync(outPath + '.meta.json', JSON.stringify(meta, null, 2), 'utf8');
+    const meta = {
+      projectId: projectId ?? null,
+      embedId: embedId ?? null,
+      by: notifyUserId ?? null,
+      at: new Date().toISOString(),
+    };
+    fs.writeFileSync(filePath + '.meta.json', JSON.stringify(meta, null, 2), 'utf8');
 
-    return res.json({ ok: true, saved: path.relative(path.join(__dirname, '..'), outPath) });
+    // optional reload
+    let reloaded = false, reloadError = null;
+    const shouldReload = String((req.query.reload ?? '1')).toLowerCase() !== '0';
+    if (shouldReload) {
+      try {
+        const Registry = require('../fs-registry');
+        if (Registry && typeof Registry.reloadEmbeds === 'function') {
+          await Promise.resolve(Registry.reloadEmbeds());
+          reloaded = true;
+        }
+      } catch (e) {
+        reloadError = String(e && e.message || e);
+      }
+    }
+
+    const savedRel = path.relative(path.join(__dirname, '..'), filePath);
+    return res.json({ ok: true, saved: savedRel, reloaded, reloadError });
   } catch (err) {
-    console.error('embed/import error:', err);
+    console.error('[embedImport] error', err);
     return res.status(500).json({ ok: false, error: String(err && err.message || err) });
   }
 });
