@@ -1,0 +1,19 @@
+{
+  "name": "discord-bot-cv2-emojiid-sync",
+  "private": true,
+  "version": "1.5.1",
+  "description": "Discord bot with file-based Components exports (fs-ingest)",
+  "main": "web.js",
+  "scripts": {
+    "start": "node web.js",
+    "start:worker": "node standalone.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.22.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
