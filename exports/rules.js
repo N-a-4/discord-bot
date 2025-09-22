@@ -13,30 +13,35 @@ const exampleContainer = new ContainerBuilder()
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addTextDisplayComponents(
     textDisplay => textDisplay
-      .setContent('### **Общие правила**'),
+      .setContent('### Общие правила'),
   )
   .addTextDisplayComponents(
     textDisplay => textDisplay
-      .setContent(`**${emojis.bigdot_purp} 1. Использование / распространение читов**
+      .setContent(`${emojis.bigdot_purp} **1. Использование / распространение читов**
 ${emojis.dot_purp} Запрещено использование стороннего софта, скриптов и любых методов нечестной игры. Также под запретом помощь в распространении или реклама таких программ.
-${emojis.report} **Наказание**: Блокировка на 365 дней (1 год)
+${emojis.report} **Наказание**: Исключение с клуба на 365 дней (1 год).
 ㅤ
-**${emojis.bigdot_purp} 2. Мошенничество и скам**
+${emojis.bigdot_purp} **2. Мошенничество и скам**
 ${emojis.dot_purp} Категорически запрещены любые действия, направленные на обман игроков: попытки получить доступ к их аккаунтам, установку подозрительных программ под видом проверки на читы, передачу фишинговых ссылок или выманивание личных данных.
-${emojis.report} **Наказание**: Блокировка клана навсегда.
+${emojis.report} **Наказание**: Исключение с клуба навсегда
 ㅤ
-**${emojis.bigdot_purp} 3. Манипуляции с системой Rustify**
+${emojis.bigdot_purp} **3. Манипуляции с системой Rustify**
 ${emojis.dot_purp} Попытки искусственно накрутить репутацию, активность или другие показатели строго запрещены.
-${emojis.report} **Наказание**: Временное понижение рейтинга или блокировка.
+${emojis.report} **Наказание**: Временное понижение репутации или исключение из клуба.
 
 ${emojis.info_yell} Администрация оставляет за собой право выдать наказание по причине, не указанной здесь, а также изменять срок/тяжесть наказания в зависимости от ситуации. По этому всегда руководствуйтесь здравым смыслом и не пытайтесь обойти правила прибегая к хитростям.`),
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757952597917").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.ok.id })
+      new ButtonBuilder().setLabel("148").setCustomId("btn:btn-1757952597917").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.like.id })
     )
   )
+let selectRow;
+let buttonsRow;
+// buttonsRow
+  buttonsRow = new ActionRowBuilder();
+  buttonsRow.addComponents(new ButtonBuilder().setLabel("Закрыть").setCustomId("embed:embed-1754855196673").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.cross_purp.id }));
 await interaction.editReply({
   flags: MessageFlags.IsComponentsV2,
-  components: [exampleContainer]
+  components: [exampleContainer, selectRow, buttonsRow].filter(Boolean)
 })

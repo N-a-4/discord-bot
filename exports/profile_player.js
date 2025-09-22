@@ -6,47 +6,34 @@ const exampleContainer = new ContainerBuilder()
   )
   .addActionRowComponents(row => row
     .addComponents(
-      new ButtonBuilder().setLabel("Профиль").setCustomId("btn:b1").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.user.id }).setDisabled(true),
-      new ButtonBuilder().setLabel("Друзья").setCustomId("embed:sub-1756382998750-a1pw").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.handshake_mix.id }),
-      new ButtonBuilder().setLabel("Депозит").setCustomId("embed:sub-1756383981566-rxh9").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.money.id })
+      new ButtonBuilder().setCustomId("embed:embed-1756285093009").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.back_purp.id }),
+      new ButtonBuilder().setLabel("Подключения").setCustomId("embed:sub-1756382998750-a1pw").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.connect_mix.id }).setDisabled(true)
     )
   )
   .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.user_2_mix} **Игрок**: @username (\`.na4.\`)
-${emojis.steam_mix} **Steam**: Не подключен
-${emojis.star_yell} \`Репутация\`: 3.7 • 12 оценок
-${emojis.balance} \`Баланс\`: Скоро`),
+        .setContent(`${emojis.steam_mix} **Steam**
+${emojis.dot_gray} Позвольте игрокам узнать о вас чуточку больше, чем просто ник`),
     )
-    .setThumbnailAccessory(thumb => thumb.setURL("https://images-ext-1.discordapp.net/external/Pgg89Z8fyGPWp46CwwQSh1NWFejJIU4YpsGArxYTFvc/https/cdn.discordapp.com/avatars/628606966540926978/a_50d35d8c13e85d5772bb8a8666b41452.gif?width=141&height=141"))
+    .setButtonAccessory(btn => btn.setLabel("Настройки").setCustomId("btn:btn-bjfbt4").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.settings_yell.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.user} **Профиль клуба**
-${emojis.dot_purp} Вы можете посмотреть как ваш профиль видят другие игроки
-`),
+        .setContent(`${emojis.tg} **Telegram**
+${emojis.dot_gray} Получите гибкую систему полезных уведомлений`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Открыть").setCustomId("btn:btn-1757277698792").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.bigdot_purp.id }))
-  )
-  .addSeparatorComponents(separator => separator.setDivider(true).setSpacing(SeparatorSpacingSize.Large))
-  .addSectionComponents(section => section
-    .addTextDisplayComponents(
-      textDisplay => textDisplay
-        .setContent(`${emojis.connect_mix} **Подключения**
-${emojis.dot_purp} Сопряжение аккаунтов с других платформ`),
-    )
-    .setButtonAccessory(btn => btn.setLabel("Перейти").setCustomId("embed:sub-1756733110144-nc0r").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.more_purp.id }))
+    .setButtonAccessory(btn => btn.setLabel("Настройки").setCustomId("btn:btn-zvs0cs").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.settings_yell.id }))
   )
   .addSectionComponents(section => section
     .addTextDisplayComponents(
       textDisplay => textDisplay
-        .setContent(`${emojis.notif} **Уведомления**
-${emojis.dot_purp} Получайте от нашего бота только интересующие вас уведомления`),
+        .setContent(`${emojis.bm} **Battlemetrics**
+${emojis.dot_gray} Узнайте больше о вашей игровой жизни`),
     )
-    .setButtonAccessory(btn => btn.setLabel("Перейти").setCustomId("btn:btn-1756739185071").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.more_purp.id }))
+    .setButtonAccessory(btn => btn.setLabel("Подключить").setCustomId("btn:btn-1757336298289").setStyle(ButtonStyle.Secondary).setEmoji({ id: emojis.more_purp.id }))
   )
 let selectRow;
 let buttonsRow;
